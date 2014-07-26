@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[HoHo~]]></title>
+  <subtitle><![CDATA[萌萌的技术博客]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://tracyone.com/"/>
+  <updated>2014-07-26T13:03:21.146Z</updated>
+  <id>http://tracyone.com/</id>
+  
+  <author>
+    <name><![CDATA[Tracy One]]></name>
+    <email><![CDATA[soochowtracy@gmail.com]]></email>
+  </author>
+  
+  <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[NewLife.md]]></title>
+    <link href="http://tracyone.com/2014/07/26/NewLife/"/>
+    <id>http://tracyone.com/2014/07/26/NewLife/</id>
+    <published>2014-07-26T07:32:04.000Z</published>
+    <updated>2014-07-26T08:04:05.000Z</updated>
+    <content type="html"><![CDATA[]]></content>
+    
+    
+  </entry>
+  
+</feed>
