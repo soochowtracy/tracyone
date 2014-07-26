@@ -41,7 +41,7 @@ highlight:
   tab_replace:
 
 # Category & Tag
-default_category: categorized
+default_category: uncategorized
 category_map:
 tag_map:
 
