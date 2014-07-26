@@ -12,7 +12,7 @@ language: zh-CN
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://tracyone.com
 root: /
 permalink: :year/:month/:day/:title/
 tag_dir: tags
@@ -80,11 +80,11 @@ disqus_shortname:
 # Extensions
 ## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
-theme: landscape
+theme: strict
 exclude_generator:
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type:github
-  repository:https://github.com/soochowtracy/tracyone.git
+  type: github
+  repository: https://github.com/soochowtracy/tracyone.git
