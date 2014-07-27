@@ -4,7 +4,7 @@
   <subtitle><![CDATA[HoHo~ 萌萌da技术博客!!!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://tracyone.com/"/>
-  <updated>2014-07-27T06:21:05.919Z</updated>
+  <updated>2014-07-27T06:23:22.250Z</updated>
   <id>http://tracyone.com/</id>
   
   <author>
@@ -19,15 +19,15 @@
     <link href="http://tracyone.com/2014/07/27/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
     <id>http://tracyone.com/2014/07/27/搭建个人博客最佳实践/</id>
     <published>2014-07-27T06:17:28.000Z</published>
-    <updated>2014-07-27T06:21:00.000Z</updated>
+    <updated>2014-07-27T06:23:00.000Z</updated>
     <content type="html"><![CDATA[<p>只有闲得蛋疼的人才会想自己搞一个博客，好好的一个周末又浪费在pc上，所幸成功了，现分享出来装下x。</p>
 <h3 id="准备工作">准备工作</h3>
 <ol>
 <li>安装git</li>
 <li>安装Node.js</li>
-<li>安装hexo<br>跳过。。。。。。<br><a id="more"></a><h3 id="干货">干货</h3>
-</li>
+<li>安装hexo<br><a id="more"></a><br>跳过。。。。。。</li>
 </ol>
+<h3 id="干货">干货</h3>
 <h4 id="在github上创建repository">在github上创建repository</h4>
 <p>在自己Github主页右下角，创建一个新的repository。比如我的Github账号是soochowtracy，那么我应该创建的repository名字应该是soochowtracy.tracyone.com。</p>
 <p><img src="http://ww2.sinaimg.cn/large/7cff62c6gw1eir9vlmxm8j20ri08st9i.jpg" alt="Alt text"></p>
@@ -70,7 +70,7 @@
 <ol>
 <li>安装git</li>
 <li>安装Node.js</li>
-<li>安装hexo<br>跳过。。。。。。<br>]]></summary>
+<li>安装hexo<br>]]></summary>
     
       <category term="hexo" scheme="http://tracyone.com/tags/hexo/"/>
     
@@ -83,7 +83,7 @@
     <link href="http://tracyone.com/2014/07/26/%E5%B7%A5%E4%BD%9C%E4%B8%80%E4%B8%AA%E6%9C%88%E6%80%BB%E7%BB%93%EF%BC%88%E5%86%8D%E5%8A%A0%E4%B8%8A%E4%B8%80%E7%82%B9%E7%82%B9iOS%E5%BF%83%E5%BE%97%EF%BC%89/"/>
     <id>http://tracyone.com/2014/07/26/工作一个月总结（再加上一点点iOS心得）/</id>
     <published>2014-07-26T13:23:01.000Z</published>
-    <updated>2014-07-27T03:47:27.000Z</updated>
+    <updated>2014-07-27T06:23:17.000Z</updated>
     <content type="html"><![CDATA[<p>转眼间大学已经毕业，总是伴着些许忧桑，其实也还好，离家很近。细数过往发现，其实我从没走出过家乡，小学、初中、高中、甚至是大学，最远的最远竟是苏州城里－－也算是进城了。</p>
 <p>踏入社会的的滋味复杂而苦涩，总是伴随着挫折渐渐成长，总结下这一年实习和一个月工作所得所失：</p>
 <h3 id="像一个成年人去思考">像一个成年人去思考</h3>
@@ -188,7 +188,7 @@ returnUIApplicationMain(argc,argv,<span class="literal">nil</span>,NSStringFromC
     
       <category term="IOS" scheme="http://tracyone.com/tags/IOS/"/>
     
-      <category term="IOS" scheme="http://tracyone.com/categories/IOS/"/>
+      <category term="ios" scheme="http://tracyone.com/categories/ios/"/>
     
   </entry>
   
