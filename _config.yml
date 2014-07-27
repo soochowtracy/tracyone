@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: HoHo~萌萌哒技术博客！！！
-subtitle: 萌萌的技术博客	
-description: 技术博客
+title: TracyOne's Blog
+subtitle: HoHo~ 萌萌da技术博客!!!	
+description: IOS
 author: Tracy One
 email: soochowtracy@gmail.com
 language: zh-CN
@@ -49,9 +49,9 @@ tag_map:
 ## 2: Enable pagination
 ## 1: Disable pagination
 ## 0: Fully Disable
-archive: 2
-category: 2
-tag: 2
+archive: 1
+category: 1
+tag: 1
 
 # Server
 ## Hexo uses Connect as a server
@@ -71,7 +71,7 @@ time_format: H:mm:ss
 
 # Pagination
 ## Set per_page to 0 to disable pagination
-per_page: 10
+per_page: 5
 pagination_dir: page
 
 # Disqus
@@ -80,7 +80,7 @@ disqus_shortname: tracyone
 # Extensions
 ## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
-theme: strict
+theme: light
 exclude_generator:
 
 # Deployment
@@ -88,3 +88,9 @@ exclude_generator:
 deploy:
   type: github
   repository: https://github.com/soochowtracy/tracyone.git
+
+plugins:
+- hexo-generator-feed
+
+
+  
