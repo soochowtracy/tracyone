@@ -4,7 +4,7 @@
   <subtitle><![CDATA[HoHo~ 萌萌da技术博客!!!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://tracyone.com/"/>
-  <updated>2014-07-27T06:18:38.533Z</updated>
+  <updated>2014-07-27T06:21:05.919Z</updated>
   <id>http://tracyone.com/</id>
   
   <author>
@@ -19,15 +19,15 @@
     <link href="http://tracyone.com/2014/07/27/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
     <id>http://tracyone.com/2014/07/27/搭建个人博客最佳实践/</id>
     <published>2014-07-27T06:17:28.000Z</published>
-    <updated>2014-07-27T06:18:32.000Z</updated>
+    <updated>2014-07-27T06:21:00.000Z</updated>
     <content type="html"><![CDATA[<p>只有闲得蛋疼的人才会想自己搞一个博客，好好的一个周末又浪费在pc上，所幸成功了，现分享出来装下x。</p>
 <h3 id="准备工作">准备工作</h3>
 <ol>
 <li>安装git</li>
 <li>安装Node.js</li>
-<li>安装hexo<br>跳过。。。。。。</li>
+<li>安装hexo<br>跳过。。。。。。<br><a id="more"></a><h3 id="干货">干货</h3>
+</li>
 </ol>
-<h3 id="干货">干货</h3>
 <h4 id="在github上创建repository">在github上创建repository</h4>
 <p>在自己Github主页右下角，创建一个新的repository。比如我的Github账号是soochowtracy，那么我应该创建的repository名字应该是soochowtracy.tracyone.com。</p>
 <p><img src="http://ww2.sinaimg.cn/large/7cff62c6gw1eir9vlmxm8j20ri08st9i.jpg" alt="Alt text"></p>
@@ -65,7 +65,12 @@
 </ol>
 <p>昨天初探了下ruby，解释型语言就是牛，写一行执行一行的感觉不要太酸爽。</p>
 ]]></content>
-    
+    <summary type="html"><![CDATA[<p>只有闲得蛋疼的人才会想自己搞一个博客，好好的一个周末又浪费在pc上，所幸成功了，现分享出来装下x。</p>
+<h3 id="准备工作">准备工作</h3>
+<ol>
+<li>安装git</li>
+<li>安装Node.js</li>
+<li>安装hexo<br>跳过。。。。。。<br>]]></summary>
     
       <category term="hexo" scheme="http://tracyone.com/tags/hexo/"/>
     
