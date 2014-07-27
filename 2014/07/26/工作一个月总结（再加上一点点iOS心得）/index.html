@@ -71,9 +71,10 @@
 <h3 id="像一个成年人去思考">像一个成年人去思考</h3>
 <p>犹记得刚实习时，像个愣头青，习惯了口无遮拦，习惯了懒散的纪律观念，习惯了12月早上8点暖和的被窝，突然间一切都变了。</p>
 <p>再这里，你就得把自己当一条狗，你什么都不是，没有什么资本值得你去炫耀，你需要做的就是努力再努力的工作。公司和学校最本质的区别是：<strong>你给学校钱，而公司却给你钱！</strong> 你已经是一个成年人了，别伤感，只是说了个事实。</p>
-<p><a id="more"></a></p>
+<a id="more"></a>
+
 <h3 id="勾心斗角总是免不了的">勾心斗角总是免不了的</h3>
-<p>最近悟出了个道理，</p>
+<p>最近悟出了个道理，。。。。。。。。。。。。这就是道理！</p>
 <p>人生本充满困难的（life is difficult），只不过有些人选择承受面对困难带来痛苦，有些人选择承受逃避困难带来的痛苦。当你深处生活的漩涡痛苦不已不能自拔的时候，你应该意识到这只不过是你选择了随波逐流人云亦云的生活带来痛苦而已，人世间没有哪条路是绝对的坦途。</p>
 <h3 id="送三条博弈论经典真理">送三条博弈论经典真理</h3>
 <ol>
@@ -113,28 +114,25 @@
 <ul>
 <li>获取设备编号</li>
 </ul>
-<blockquote>
-<p>UIDevice <em>device = [UIDevice currentDevice];<br>NSUUID </em>uniqueIdentifier = device.identifierForVendor;</p>
-</blockquote>
-<ul>
+<pre><code><span class="constant">UIDevice *device</span> = [UIDevice currentDevice];
+<span class="constant">NSUUID *uniqueIdentifier</span> = device.identifierForVendor;
+</code></pre><ul>
 <li>tableView选择风格</li>
 </ul>
-<blockquote>
-<p>(UITableViewCellEditingStyle)tableView:(UITableView <em>)tableView editingStyleForRowAtIndexPath:(NSIndexPath </em>)indexPath<br>{<br>    return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;<br>}</p>
-</blockquote>
-<ul>
+<pre><code>(UITableViewCellEditingStyle)tableView:(<span class="built_in">UITableView</span> *)tableView editingStyleForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath
+{
+    <span class="keyword">return</span> UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
+}
+</code></pre><ul>
 <li>排序：</li>
 </ul>
-<blockquote>
-<p>NSArray <em>sortDesc = @[[[NSSortDescriptor alloc] initWithKey:nil ascending:NO]];<br>NSArray </em>sortSetArray = [timeset sortedArrayUsingDescriptors:sortDesc];</p>
-</blockquote>
-<ul>
+<pre><code> NSArray *sortDesc = @<span class="string">[[[NSSortDescriptor alloc] initWithKey:nil ascending:NO]]</span>;
+ NSArray *sortSetArray = [timeset sortedArrayUsingDescriptors:sortDesc];
+</code></pre><ul>
 <li>字符串比较：</li>
 </ul>
-<blockquote>
-<p>if ([weekDate compare:[record objectForKey:@”expense_date”]] == -1)</p>
-</blockquote>
-<h4 id="反编译地址经典教程">反编译地址经典教程</h4>
+<pre><code><span class="keyword">if</span> ([weekDate <span class="keyword">compare</span>:[record objectForKey:@<span class="string">"expense_date"</span>]] == -<span class="number">1</span>)
+</code></pre><h4 id="反编译地址经典教程">反编译地址经典教程</h4>
 <pre><code>CGFloatlat=<span class="number">30.0</span>;CGFloatlng=<span class="number">120.0</span>;
 CLGeocoder*coder=[[CLGeocoderalloc]init];
 CLLocation*mapLocation=[[CLLocationalloc]initWithLatitude:latlongitude:lng];

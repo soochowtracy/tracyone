@@ -4,7 +4,7 @@
   <subtitle><![CDATA[HoHo~ 萌萌da技术博客!!!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://tracyone.com/"/>
-  <updated>2014-07-27T03:39:05.613Z</updated>
+  <updated>2014-07-27T03:47:34.075Z</updated>
   <id>http://tracyone.com/</id>
   
   <author>
@@ -19,15 +19,16 @@
     <link href="http://tracyone.com/2014/07/26/%E5%B7%A5%E4%BD%9C%E4%B8%80%E4%B8%AA%E6%9C%88%E6%80%BB%E7%BB%93%EF%BC%88%E5%86%8D%E5%8A%A0%E4%B8%8A%E4%B8%80%E7%82%B9%E7%82%B9iOS%E5%BF%83%E5%BE%97%EF%BC%89/"/>
     <id>http://tracyone.com/2014/07/26/工作一个月总结（再加上一点点iOS心得）/</id>
     <published>2014-07-26T13:23:01.000Z</published>
-    <updated>2014-07-26T13:30:21.000Z</updated>
+    <updated>2014-07-27T03:47:27.000Z</updated>
     <content type="html"><![CDATA[<p>转眼间大学已经毕业，总是伴着些许忧桑，其实也还好，离家很近。细数过往发现，其实我从没走出过家乡，小学、初中、高中、甚至是大学，最远的最远竟是苏州城里－－也算是进城了。</p>
 <p>踏入社会的的滋味复杂而苦涩，总是伴随着挫折渐渐成长，总结下这一年实习和一个月工作所得所失：</p>
 <h3 id="像一个成年人去思考">像一个成年人去思考</h3>
 <p>犹记得刚实习时，像个愣头青，习惯了口无遮拦，习惯了懒散的纪律观念，习惯了12月早上8点暖和的被窝，突然间一切都变了。</p>
 <p>再这里，你就得把自己当一条狗，你什么都不是，没有什么资本值得你去炫耀，你需要做的就是努力再努力的工作。公司和学校最本质的区别是：<strong>你给学校钱，而公司却给你钱！</strong> 你已经是一个成年人了，别伤感，只是说了个事实。</p>
-<p><a id="more"></a></p>
+<a id="more"></a>
+
 <h3 id="勾心斗角总是免不了的">勾心斗角总是免不了的</h3>
-<p>最近悟出了个道理，</p>
+<p>最近悟出了个道理，。。。。。。。。。。。。这就是道理！</p>
 <p>人生本充满困难的（life is difficult），只不过有些人选择承受面对困难带来痛苦，有些人选择承受逃避困难带来的痛苦。当你深处生活的漩涡痛苦不已不能自拔的时候，你应该意识到这只不过是你选择了随波逐流人云亦云的生活带来痛苦而已，人世间没有哪条路是绝对的坦途。</p>
 <h3 id="送三条博弈论经典真理">送三条博弈论经典真理</h3>
 <ol>
@@ -67,28 +68,25 @@
 <ul>
 <li>获取设备编号</li>
 </ul>
-<blockquote>
-<p>UIDevice <em>device = [UIDevice currentDevice];<br>NSUUID </em>uniqueIdentifier = device.identifierForVendor;</p>
-</blockquote>
-<ul>
+<pre><code><span class="constant">UIDevice *device</span> = [UIDevice currentDevice];
+<span class="constant">NSUUID *uniqueIdentifier</span> = device.identifierForVendor;
+</code></pre><ul>
 <li>tableView选择风格</li>
 </ul>
-<blockquote>
-<p>(UITableViewCellEditingStyle)tableView:(UITableView <em>)tableView editingStyleForRowAtIndexPath:(NSIndexPath </em>)indexPath<br>{<br>    return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;<br>}</p>
-</blockquote>
-<ul>
+<pre><code>(UITableViewCellEditingStyle)tableView:(<span class="built_in">UITableView</span> *)tableView editingStyleForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath
+{
+    <span class="keyword">return</span> UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
+}
+</code></pre><ul>
 <li>排序：</li>
 </ul>
-<blockquote>
-<p>NSArray <em>sortDesc = @[[[NSSortDescriptor alloc] initWithKey:nil ascending:NO]];<br>NSArray </em>sortSetArray = [timeset sortedArrayUsingDescriptors:sortDesc];</p>
-</blockquote>
-<ul>
+<pre><code> NSArray *sortDesc = @<span class="string">[[[NSSortDescriptor alloc] initWithKey:nil ascending:NO]]</span>;
+ NSArray *sortSetArray = [timeset sortedArrayUsingDescriptors:sortDesc];
+</code></pre><ul>
 <li>字符串比较：</li>
 </ul>
-<blockquote>
-<p>if ([weekDate compare:[record objectForKey:@”expense_date”]] == -1)</p>
-</blockquote>
-<h4 id="反编译地址经典教程">反编译地址经典教程</h4>
+<pre><code><span class="keyword">if</span> ([weekDate <span class="keyword">compare</span>:[record objectForKey:@<span class="string">"expense_date"</span>]] == -<span class="number">1</span>)
+</code></pre><h4 id="反编译地址经典教程">反编译地址经典教程</h4>
 <pre><code>CGFloatlat=<span class="number">30.0</span>;CGFloatlng=<span class="number">120.0</span>;
 CLGeocoder*coder=[[CLGeocoderalloc]init];
 CLLocation*mapLocation=[[CLLocationalloc]initWithLatitude:latlongitude:lng];
@@ -122,7 +120,7 @@ returnUIApplicationMain(argc,argv,<span class="literal">nil</span>,NSStringFromC
 <h3 id="像一个成年人去思考">像一个成年人去思考</h3>
 <p>犹记得刚实习时，像个愣头青，习惯了口无遮拦，习惯了懒散的纪律观念，习惯了12月早上8点暖和的被窝，突然间一切都变了。</p>
 <p>再这里，你就得把自己当一条狗，你什么都不是，没有什么资本值得你去炫耀，你需要做的就是努力再努力的工作。公司和学校最本质的区别是：<strong>你给学校钱，而公司却给你钱！</strong> 你已经是一个成年人了，别伤感，只是说了个事实。</p>
-<p>]]></summary>
+]]></summary>
     
       <category term="IOS" scheme="http://tracyone.com/tags/IOS/"/>
     
