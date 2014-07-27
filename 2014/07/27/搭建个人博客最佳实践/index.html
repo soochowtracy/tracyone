@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>aboutme | TracyOne&#39;s Blog</title>
+  <title>搭建个人博客最佳实践 | TracyOne&#39;s Blog</title>
   <meta name="author" content="Tracy One">
   
   <meta name="description" content="IOS">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="aboutme"/>
+  <meta property="og:title" content="搭建个人博客最佳实践"/>
   <meta property="og:site_name" content="TracyOne&#39;s Blog"/>
 
   
@@ -50,28 +50,83 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="page">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
   <div class="post-content">
     <header>
       
+        <div class="icon"></div>
+        <time datetime="2014-07-27T06:17:28.000Z"><a href="/2014/07/27/搭建个人博客最佳实践/">7月 27 2014</a></time>
+      
       
   
-    <h1 class="title">aboutme</h1>
+    <h1 class="title">搭建个人博客最佳实践</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>本人男，未婚！！！<br><a id="more"></a></p>
-<h3 id="其余脑补或者qq（1075761328）详谈">其余脑补或者qq（1075761328）详谈</h3>
+        <p>只有闲得蛋疼的人才会想自己搞一个博客，好好的一个周末又浪费在pc上，所幸成功了，现分享出来装下x。</p>
+<h3 id="准备工作">准备工作</h3>
+<ol>
+<li>安装git</li>
+<li>安装Node.js</li>
+<li>安装hexo<br>跳过。。。。。。</li>
+</ol>
+<h3 id="干货">干货</h3>
+<h4 id="在github上创建repository">在github上创建repository</h4>
+<p>在自己Github主页右下角，创建一个新的repository。比如我的Github账号是soochowtracy，那么我应该创建的repository名字应该是soochowtracy.tracyone.com。</p>
+<p><img src="http://ww2.sinaimg.cn/large/7cff62c6gw1eir9vlmxm8j20ri08st9i.jpg" alt="Alt text"></p>
+<h4 id="创建hexo文件">创建hexo文件</h4>
+<p>在终端中输入</p>
+<ul>
+<li>mkdir hexo</li>
+<li>cd hexo</li>
+<li>hexo init</li>
+<li>npm install</li>
+</ul>
+<h4 id="部署上去吧少年">部署上去吧少年</h4>
+<p>编辑_config.yml。你在部署时，要把下面的<strong>tracyone</strong>都换成你的账号名。</p>
+<pre><code>deploy:
+  <span class="class"><span class="keyword">type</span>: <span class="title">github</span></span>
+  repository: https:<span class="comment">//github.com/soochowtracy/tracyone.git</span>
+</code></pre><p>执行下列指令就o啦：</p>
+<ul>
+<li>hexo g</li>
+<li>hexo d</li>
+</ul>
+<h4 id="来一发">来一发</h4>
+<p>搭好了该干点什么呢？？？来一发吧，通过<strong>hexo new blogtitle</strong>，自动会在_post目录下生成，然后用markdown语法写你的博客吧（下次有机会再介绍markdown）。</p>
+<h4 id="替换皮肤中。。。">替换皮肤中。。。</h4>
+<p>每个人都有追求美的权利，hexo当然也有，为此很多程序员为之不懈努力，推荐一个hexo皮肤源<strong><a href="https://github.com/tommy351/hexo/wiki/Themes" target="_blank" rel="external">https://github.com/tommy351/hexo/wiki/Themes</a></strong>。下好了放在theme目录下。最后再_config.yml中把theme: 改成 theme: xxxxx。</p>
+<h3 id="Q&amp;A">Q&amp;A</h3>
+<p>Q:我怎么访问这么慢呀？？？？<br>A:国情问题，不过没关系360有自己的字体。只需把文件中所有的googleapis改成useso。</p>
+<p>Q:我还是不能访问阿？？？？<br>A:域名解析有问题阿。昨天搞了我一天现特贴图：<br><img src="http://ww1.sinaimg.cn/large/7cff62c6gw1eirbo3aiv8j21k60eo76i.jpg" alt="Alt text"></p>
+<h3 id="总结">总结</h3>
+<p>我发现这篇写的好水啊。下次有机会出一篇史诗级的，今天实在太忙了！！！<br>最后列一下接下来准备学习的清单：</p>
+<ol>
+<li>ios (design pattern)</li>
+<li>swift</li>
+<li>ruby (not rail)</li>
+</ol>
+<p>昨天初探了下ruby，解释型语言就是牛，写一行执行一行的感觉不要太酸爽。</p>
 
       
     </div>
     <footer>
       
         
+  
+  <div class="categories">
+    <a href="/categories/Hexo/">Hexo</a>
+  </div>
+
         
+  
+  <div class="tags">
+    <a href="/tags/hexo/">hexo</a>
+  </div>
+
         
       
       <div class="clearfix"></div>
@@ -83,6 +138,8 @@
 
  <nav id="pagination" >
     
+    
+    <a href="/2014/07/26/工作一个月总结（再加上一点点iOS心得）/" class="alignright next" >下一页</a>
     
     <div class="clearfix"></div>
 </nav>
@@ -118,7 +175,7 @@ var duoshuoQuery = {short_name:"tracyone"};
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://tracyone.com/aboutme/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://tracyone.com/2014/07/27/搭建个人博客最佳实践/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
