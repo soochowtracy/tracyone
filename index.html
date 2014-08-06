@@ -57,6 +57,540 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2014-08-06T12:19:58.000Z"><a href="/2014/08/06/优秀的ios7实践：天气应用学习（上）/">8月 6 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/08/06/优秀的ios7实践：天气应用学习（上）/"></a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>title: 优秀的ios7实践：天气应用学习（上）<br>date: 2014-08-06 20:18:05<br>tags:ios</p>
+<h2 id="categories:IOS">categories:IOS</h2>
+<h1 id="优秀的ios7实践：天气应用学习（上）">优秀的ios7实践：天气应用学习（上）</h1>
+<h3 id="写在开头的话">写在开头的话</h3>
+<p>整整三个礼拜，曾自信的以为能够翻译全文的，结果还是只完成了上半部分，中间断断续续，不管怎么说还是坚持了下来。</p>
+<p>发现看懂英文和翻译成比较顺口的文章还是有差别的，希望以后能够大大的提高自己的英语口语水平。</p>
+<p>还有上次说的ruby计划已经泡汤，不知道合适才能重拾ruby，下一次准备发一篇对设计模式的理解，和最近再研究的<strong>reactivecocoa</strong></p>
+<p><a href="http://www.raywenderlich.com/55384/ios-7-best-practices-part-1" target="_blank" rel="external">译文</a> 作者：Ryan Nystrom</p>
+<p>每个开发者对于如何去创建一个优秀的ios应用都有他们的想法。有些开发者利用自动布局，有些喜欢用代码写ui，甚至有些喜欢用vim来编码。</p>
+<p>随着最近ios7和xcode5升级，我觉得是时候提供一个教学用多种方法和工具创建一个基础的天气应用；你可以把这看成是我最好的一次ios7实践。ios先驱开发者习惯创建一个待办应用，然而新生代希望像ios的更新一样娴熟的用新的技术，例如，数据管理和网络请求等。</p>
+<p> 在这个教程中，你会学会怎么利用下列工具和知识创建你自己的app：</p>
+<ul>
+<li>Cocoapods</li>
+<li>manual layout in code</li>
+<li>ReactiveCocoa</li>
+<li>OpenWeatherMap</li>
+</ul>
+<p>这个课程是为那些有一定基础但还没踏入太多高等领域的进阶开发者设计的。它对那些想探索OC实用程序也是一个好的开始。</p>
+<h2 id="开始">开始</h2>
+<p>打开Xcode到<strong>File\New\Project</strong>。选择<strong>Application\Empty Application</strong>。项目名字     叫<strong>SimpleWeather</strong>，点击<strong>Next</strong>，再选一个目录存放，最后点<strong>Create</strong>。</p>
+<p>现在你搭好了基础的项目，下一步开始搭建第三方库，不过先保证你的Xcode是关闭的而不会影响接下来的步骤。</p>
+<h3 id="Cocoapods">Cocoapods</h3>
+<p>你将会用<strong><a href="http://cocoapods.org" target="_blank" rel="external">Cocoapods</a></strong>管理那些下载的代码，添加文件到你的项目和配置任何你项目需要的设置。让我们先来看看你需要那些项目。</p>
+<h3 id="Mantle">Mantle</h3>
+<p><strong><a href="https://github.com/Mantle/Mantle" target="_blank" rel="external">Mantle</a></strong> 是由Github团队编写用来清除在oc中nsobject转换成json的样板代码。Mantle也可以把简单的json值转换成复杂的例如NSdate，NSURL，甚至一些自定义的类。</p>
+<h3 id="LBBlurredImage">LBBlurredImage</h3>
+<p><strong><a href="https://github.com/lukabernardi/LBBlurredImage" target="_blank" rel="external">LBBlurredImage</a></strong>是一个用来处理图片模糊的UIImageView的扩展。你能用一行简单的代码达到模糊效果，如果想知道原理，下载<a href="https://github.com/lukabernardi/LBBlurredImage/blob/master/LBBlurredImage/UIImageView%2BLBBlurredImage.m#L25-88" target="_blank" rel="external">源码</a>。</p>
+<h3 id="TSMessages">TSMessages</h3>
+<p><strong><a href="https://github.com/toursprung/TSMessages" target="_blank" rel="external">TSMessages</a></strong> 是又一个用来弹出显示警告和通知的轻量级库。当你呈现的错误信息不够清晰的时候，展示一层透明警告栏而不是模板试图（例如 UIAlertView）来尽可能减少用户的反感。</p>
+<p>你可以在网络连接失败或者APl引起的其他错误时使用TSMessages。如果出了任何问题，你会看到：<br><img src="./TSMessage.png" alt="Alt text"></p>
+<h3 id="ReactiveCocoa">ReactiveCocoa</h3>
+<p>你会用到最后一个也是由Github团队编写的库就是<strong><a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="external">ReactiveCocoa</a></strong>。它带来了就像.NET中的Reactive Extensions一样在oc 中的一种设计模式，你将会花大量时间来学习它。</p>
+<h2 id="设置你的Cocoapods库">设置你的Cocoapods库</h2>
+<p>要搭建Cocoapods库，先要确保你已经安装了，为此打开终端，打下列命令然后敲打回车。</p>
+<blockquote>
+<p>which pod</p>
+</blockquote>
+<p>你会看到类似下列信息：</p>
+<blockquote>
+<p>/user/bin/pod</p>
+</blockquote>
+<p>这取决于你如何管理你的Ruby gems，比如说，如果你用<a href="http://rbenv.org" target="_blank" rel="external">rbenv</a>或者<a href="http://rvm.io" target="_blank" rel="external">RVM</a>那么你的路径可能略有不同。</p>
+<p>如果终端返回的是<strong>pod not found</strong>，说明Cocoapods还没安装；按照我们的<a href="http://www.raywenderlich.com/64546/introduction-to-cocoapods-2" target="_blank" rel="external">Cocoapods教程</a>安装，如果你想学习更多那也是一个很好的资源。</p>
+<p><a href="http://guides.cocoapods.org/syntax/podfile.html" target="_blank" rel="external">Podfiles</a>用来告诉Cocoapod应该包括哪些Pods，开源项目。</p>
+<p>要创建你第一个Cocoapod项目，在终端先用<strong>cd</strong>命令切换到存有你的xcode文件夹。在终端中用vim Podfile写下下列命令：</p>
+<blockquote>
+<p>platform :ios, ‘7.0’<br>pod ‘Mantle’<br>pod ‘LBBlurredImage’<br>pod ‘TSMessages’<br>pod ‘ReactiveCocoa’</p>
+</blockquote>
+<p>这个文件会做两件事：</p>
+<ul>
+<li>告诉Cocoapods你目标版本是哪个，现在这个是ios 7.0。</li>
+<li>它也告诉Cocoapods你要引入的一系列项目。</li>
+</ul>
+<p>打下列命令来安装四个Pods：</p>
+<blockquote>
+<p>pod install</p>
+</blockquote>
+<p>耐心的等待pod安装大量的包，最终你的终端会显示下列信息：</p>
+<blockquote>
+<p>Analyzing dependencies<br>Downloading dependencies<br>Installing HexColors (2.2.1)<br>Installing LBBlurredImage (0.2.0)<br>Installing Mantle (1.5)<br>Installing ReactiveCocoa (2.3.1)<br>Installing TSMessages (0.9.9)<br>Generating Pods project<br>Integrating client project<br>[!] From now on use <code>SimpleWeather.xcworkspace</code>.</p>
+</blockquote>
+<p>Cocoapods会在你的项目目录中创建一个新的分支；不过你只需要关心<strong>SimpleWeather.xcworkspace</strong>.</p>
+<p>打开<strong>SimpleWeather.xcworkspace</strong>，你会看到每个你引入的库和pods项目：<br><img src="./1406077531612.png" alt="Alt text"></p>
+<p>如下图一样确保你选中了<strong>SimpleWeather</strong>项目：<br><img src="./1406077589471.png" alt="Alt text"></p>
+<p>运行一下以确保每件事都顺利进行着：<br><img src="./A674CE16-1DF7-4021-8C61-91EC9AEDA6D7.png" alt="Alt text"></p>
+<p>现在看上去好像不太对，不过你马上就会添加一些内容。</p>
+<blockquote>
+<p><strong>Note:</strong> 你可能会发现一些警告，那是因为项目中引入了一些其他开发者的库，每个开发者对于警告都有自己的忍耐程度。大多数时间只需要忽略它们，只需要确保没有编译错误！</p>
+</blockquote>
+<h2 id="创建你的主试图">创建你的主试图</h2>
+<p>应用看上去很复杂，其实也就一个试图控制器，接下来你会增加一个。</p>
+<p>选中项目，点击<strong>File\New\File</strong>然后选择<strong>CocopTouch\Objective-C</strong>，取名<strong>WXController</strong>，继承<strong>UIViewController</strong>。</p>
+<p>确保<strong>Targeted for iPad</strong> 和 <strong>With XIB for user interface</strong>都没选：<br><img src="./1406251719497.png" alt="Alt text"></p>
+<p>打开<strong>WXController.m</strong> 在<strong>-viewDidLoad</strong>方法中如下重写：</p>
+<blockquote>
+<p> -(void)viewDidLoad{<br>    [super viewDidLoad]<br>    self.view.backgroundColor = [UIColor redColor];<br>}</p>
+</blockquote>
+<p>然后打开<strong>AppDelegate.m</strong>，引入下列两个类。</p>
+<blockquote>
+<p>import “WXController.h”<br>import <tsmessage.h></tsmessage.h></p>
+</blockquote>
+<p>眼尖的读者会发现<strong>WXController</strong>用了双引号而<strong>TSMessage</strong>却是尖括号，有什么区别呢？</p>
+<p>回想下在创建Podfile时,你用Cocoapods引入TSMessage。Cocoapods创建了TSMessage项目并加到你的工作区。如果你是从工作区引入其他项目，只需要用尖括号。<br>用下列代码代替 <strong>-application:didFinishLaunchingWithOptions:</strong></p>
+<blockquote>
+<p>-(BOOL)application:(UIApplication <em>)application didFinishLaunchingWithOptions:(NSDictionary </em>)launchOptions {<br>    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];<br>    // 1<br>    self.window.rootViewController = [[WXController alloc] init];<br>    self.window.backgroundColor = [UIColor whiteColor];<br>    [self.window makeKeyAndVisible];<br>    // 2<br>    [TSMessage setDefaultViewController: self.window.rootViewController];<br>    return YES;<br>}</p>
+</blockquote>
+<p>随着数字注释你会发现：</p>
+<ol>
+<li>初始化并把<strong>WXController</strong>设为application的根试图。通常都是一个<strong>UINavigationgController</strong>或者<strong>UItabBarController</strong>，不过在这个应用中，你将用到<strong>WxController</strong>。</li>
+<li>设置默认的试图控制器给TSMessage，这样你就不需要经常选择哪个去呈现警告。</li>
+</ol>
+<p>状态栏在红色的背景中很不清晰，还好有一种比较简单的方法改善。<br>在ios7的<strong>UIViewController</strong>中有个新接口控制状态栏的外观，打开<strong>WXController</strong>在<strong>-viewDidLoad</strong>下面写下这些代码：</p>
+<blockquote>
+<p>-(UIStatusBarStyle)preferredStatusBarStyle {<br>    return UIStatusBarStyleLightContent;<br>}</p>
+</blockquote>
+<p>运行一下你会发现状态栏变成白色了。</p>
+<h2 id="设置App的试图">设置App的试图</h2>
+<p>是时候实现你的app了，下载必要的图片然后放在合适的地方，这些图片是由Flickr和Dribbble提供的。</p>
+<blockquote>
+<p><strong>Note:</strong>背景图片是San Francisco的景象，因为这个应用定位的就是这里，你也可以自由定制你的北京图片，比如你的家乡还有其他。</p>
+</blockquote>
+<p>回到<strong>Xcode</strong>添加图片到app，选中<strong>Copy items into destination group’s folder(if needed)</strong>。</p>
+<p>打开<strong>WXController.h</strong>添加以下代理协议：</p>
+<blockquote>
+<uitableviewdatasource, uitableviewdelegate,="" uiscrollviewdelegate="">
+
+</uitableviewdatasource,></blockquote>
+<p>打开<strong>WXController</strong>，你可以通过cmd+ctrl+up在.h,.m文件快速切换。</p>
+<p>引入下列文件：</p>
+<blockquote>
+<p>＃import <lbblurredimage uiimageview+lbblurredimage.h=""></lbblurredimage></p>
+</blockquote>
+<p><strong>LBBIurredImage.h</strong>在Cocoapods中，你会用它来处理你的背景图片。</p>
+<p>在引入下面添加几个空的私有属性：</p>
+<blockquote>
+<p>@interface WXController ()<br>@property (nonatomic, strong) UIImageView <em>backgroundImageView;<br>@property (nonatomic, strong) UIImageView </em>blurredImageView;<br>@property (nonatomic, strong) UITableView *tableView;<br>@property (nonatomic, assign) CGFloat screenHeight;<br>@end</p>
+</blockquote>
+<p>是时候创建图片了，也许你会问<strong>IBoutlets</strong>在哪？没关系，我们都会用代码来实现。</p>
+<p>等等，别发飙，其实有很多种方法来创建视图个人有各自的偏好，Storyboard,NIBs还有code都有反对和支持者。</p>
+<p>这个应用的视图不是很复杂，也没有什么触发事件会导致自动布局异常，而且这个应用是用来学习的，还是选择代码布局。</p>
+<p>你会创建三层视图来达到一开始你看的那种动画效果，下面是一个模型，tableview的外观会改变。</p>
+<p><img src="./1406510556629.png" alt="Alt text"></p>
+<p>为了实现动态模糊效果，在滑动视图的时候需要改alpha</p>
+<p>打开<strong>WXController</strong>用下列代码替换<strong> viewDidLoad</strong>中的来设置背景颜色：</p>
+<pre><code><span class="comment">// 1</span>
+<span class="keyword">self</span><span class="variable">.screenHeight</span> = [UIScreen mainScreen]<span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.height</span>;
+
+<span class="built_in">UIImage</span> *background = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"bg"</span>];
+
+<span class="comment">// 2</span>
+<span class="keyword">self</span><span class="variable">.backgroundImageView</span> = [[<span class="built_in">UIImageView</span> alloc] initWithImage:background];
+<span class="keyword">self</span><span class="variable">.backgroundImageView</span><span class="variable">.contentMode</span> = UIViewContentModeScaleAspectFill;
+[<span class="keyword">self</span><span class="variable">.view</span> addSubview:<span class="keyword">self</span><span class="variable">.backgroundImageView</span>];
+
+<span class="comment">// 3</span>
+<span class="keyword">self</span><span class="variable">.blurredImageView</span> = [[<span class="built_in">UIImageView</span> alloc] init];
+<span class="keyword">self</span><span class="variable">.blurredImageView</span><span class="variable">.contentMode</span> = UIViewContentModeScaleAspectFill;
+<span class="keyword">self</span><span class="variable">.blurredImageView</span><span class="variable">.alpha</span> = <span class="number">0</span>;
+[<span class="keyword">self</span><span class="variable">.blurredImageView</span> setImageToBlur:background blurRadius:<span class="number">10</span> completionBlock:<span class="literal">nil</span>];
+[<span class="keyword">self</span><span class="variable">.view</span> addSubview:<span class="keyword">self</span><span class="variable">.blurredImageView</span>];
+
+<span class="comment">// 4</span>
+<span class="keyword">self</span><span class="variable">.tableView</span> = [[<span class="built_in">UITableView</span> alloc] init];
+<span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];
+<span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.delegate</span> = <span class="keyword">self</span>;
+<span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.dataSource</span> = <span class="keyword">self</span>;
+<span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.separatorColor</span> = [<span class="built_in">UIColor</span> colorWithWhite:<span class="number">1</span> alpha:<span class="number">0.2</span>];
+<span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.pagingEnabled</span> = <span class="literal">YES</span>;
+[<span class="keyword">self</span><span class="variable">.view</span> addSubview:<span class="keyword">self</span><span class="variable">.tableView</span>];
+</code></pre><p>这是相当简单的一段代码：</p>
+<ol>
+<li>保存屏幕高度，在接下来呈现天气数据的时候需要用到。</li>
+<li>创建一个静态的背景图片，添加到视图。</li>
+<li>用LBBLurredImage创建一个模糊背景图，设置alpha为0以至于背景图片是可见的。</li>
+<li>创建一个tableview来呈现数据，WXController是代理者，也是scrollview的，注意<strong>pagingEnabled</strong>设置成YES。</li>
+</ol>
+<p>在<strong>WXController</strong>的<strong>@implementation</strong>部分增加下列代码来实现UITableView的代理</p>
+<pre><code><span class="comment">// 1</span>
+<span class="preprocessor">#pragma mark - UITableViewDataSource</span>
+
+<span class="comment">// 2</span>
+- (<span class="built_in">NSInteger</span>)numberOfSectionsInTableView:(<span class="built_in">UITableView</span> *)tableView {
+    <span class="keyword">return</span> <span class="number">2</span>;
+}
+
+- (<span class="built_in">NSInteger</span>)tableView:(<span class="built_in">UITableView</span> *)tableView numberOfRowsInSection:(<span class="built_in">NSInteger</span>)section {
+    <span class="comment">// TODO: Return count of forecast</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+
+- (<span class="built_in">UITableViewCell</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView cellForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath {
+    <span class="keyword">static</span> <span class="built_in">NSString</span> *CellIdentifier = <span class="string">@"CellIdentifier"</span>;
+    <span class="built_in">UITableViewCell</span> *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+    <span class="keyword">if</span> (! cell) {
+        cell = [[<span class="built_in">UITableViewCell</span> alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    }
+
+    <span class="comment">// 3</span>
+    cell<span class="variable">.selectionStyle</span> = UITableViewCellSelectionStyleNone;
+    cell<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> colorWithWhite:<span class="number">0</span> alpha:<span class="number">0.2</span>];
+    cell<span class="variable">.textLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> whiteColor];
+    cell<span class="variable">.detailTextLabel</span><span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> whiteColor];
+
+    <span class="comment">// TODO: Setup the cell</span>
+
+    <span class="keyword">return</span> cell;
+}
+
+<span class="preprocessor">#pragma mark - UITableViewDelegate</span>
+
+- (<span class="built_in">CGFloat</span>)tableView:(<span class="built_in">UITableView</span> *)tableView heightForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath {
+    <span class="comment">// TODO: Determine cell height based on screen</span>
+    <span class="keyword">return</span> <span class="number">44</span>;
+}
+</code></pre><p>即使上述代码有些是描述性的，你也能学到一些：</p>
+<ol>
+<li>Pragma marks 能够很好的帮助组织代码。</li>
+<li>你的列表分两段，一段用来播报每小时预告，一段放每日信息，所以每次都返回两段。</li>
+<li>预报的cell不能被选中，给它们透明黑的背景和白色的内容。</li>
+</ol>
+<blockquote>
+<p>注意：用标准话的注释。<strong>// TODO:</strong>帮助Xcode找到你需要完成的代码，甚至你还能用Ctrl－6来看TODO元素。</p>
+</blockquote>
+<p>最后在<strong>WXControlle.m</strong>中加入下列代码：</p>
+<pre><code>- (<span class="keyword">void</span>)viewWillLayoutSubviews {
+    [<span class="keyword">super</span> viewWillLayoutSubviews];
+
+    <span class="built_in">CGRect</span> bounds = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.bounds</span>;
+
+    <span class="keyword">self</span><span class="variable">.backgroundImageView</span><span class="variable">.frame</span> = bounds;
+    <span class="keyword">self</span><span class="variable">.blurredImageView</span><span class="variable">.frame</span> = bounds;
+    <span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.frame</span> = bounds;
+}
+</code></pre><p>试图控制器用上述代码来布局<strong>WXController.m</strong>的子试图。建立并运行来看看你的试图。</p>
+<p><img src="./1406768968241.png" alt="Alt text"></p>
+<p>仔细看，你会发现有些一些不透明的分割线。仍然在 <strong>-viewDidLoad</strong>加入下列代码来布局：</p>
+<pre><code><span class="comment">// 1</span>
+<span class="built_in">CGRect</span> headerFrame = [UIScreen mainScreen]<span class="variable">.bounds</span>;
+<span class="comment">// 2</span>
+<span class="built_in">CGFloat</span> inset = <span class="number">20</span>;
+<span class="comment">// 3</span>
+<span class="built_in">CGFloat</span> temperatureHeight = <span class="number">110</span>;
+<span class="built_in">CGFloat</span> hiloHeight = <span class="number">40</span>;
+<span class="built_in">CGFloat</span> iconHeight = <span class="number">30</span>;
+<span class="comment">// 4</span>
+<span class="built_in">CGRect</span> hiloFrame = CGRectMake(inset, 
+                              headerFrame<span class="variable">.size</span><span class="variable">.height</span> - hiloHeight,
+                              headerFrame<span class="variable">.size</span><span class="variable">.width</span> - (<span class="number">2</span> * inset),
+                              hiloHeight);
+
+<span class="built_in">CGRect</span> temperatureFrame = CGRectMake(inset, 
+                                     headerFrame<span class="variable">.size</span><span class="variable">.height</span> - (temperatureHeight + hiloHeight),
+                                     headerFrame<span class="variable">.size</span><span class="variable">.width</span> - (<span class="number">2</span> * inset),
+                                     temperatureHeight);
+
+<span class="built_in">CGRect</span> iconFrame = CGRectMake(inset, 
+                              temperatureFrame<span class="variable">.origin</span><span class="variable">.y</span> - iconHeight, 
+                              iconHeight, 
+                              iconHeight);
+<span class="comment">// 5</span>
+<span class="built_in">CGRect</span> conditionsFrame = iconFrame;
+conditionsFrame<span class="variable">.size</span><span class="variable">.width</span> = <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> - (((<span class="number">2</span> * inset) + iconHeight) + <span class="number">10</span>);
+conditionsFrame<span class="variable">.origin</span><span class="variable">.x</span> = iconFrame<span class="variable">.origin</span><span class="variable">.x</span> + (iconHeight + <span class="number">10</span>);
+</code></pre><p>这是一些很常规的设置，下面是注释：</p>
+<ol>
+<li>设置列表和屏幕一样大，列表分成头，每日，和每小时预报是有好处的。</li>
+<li>创建一个边距变量用来更好的布局你的标签。</li>
+<li>创建一系列用来初始化试图的高度变量，设为常量来方便的配置和改变你试图。</li>
+<li>用这些常量创建你标签和图标的大小。</li>
+<li>拷贝这些图标边框，调整到内容能够有一些扩展的空间，放到原有图标的右边，你会发现这些布局是怎么起作用的。</li>
+</ol>
+<p>把下列代码拷贝到<strong>-viewDidLoad</strong>中：</p>
+<pre><code><span class="comment">// 1</span>
+<span class="built_in">UIView</span> *header = [[<span class="built_in">UIView</span> alloc] initWithFrame:headerFrame];
+header<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];
+<span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.tableHeaderView</span> = header;
+
+<span class="comment">// 2</span>
+<span class="comment">// bottom left</span>
+<span class="built_in">UILabel</span> *temperatureLabel = [[<span class="built_in">UILabel</span> alloc] initWithFrame:temperatureFrame];
+temperatureLabel<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];
+temperatureLabel<span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> whiteColor];
+temperatureLabel<span class="variable">.text</span> = <span class="string">@"0°"</span>;
+temperatureLabel<span class="variable">.font</span> = [<span class="built_in">UIFont</span> fontWithName:<span class="string">@"HelveticaNeue-UltraLight"</span> size:<span class="number">120</span>];
+[header addSubview:temperatureLabel];
+
+<span class="comment">// bottom left</span>
+<span class="built_in">UILabel</span> *hiloLabel = [[<span class="built_in">UILabel</span> alloc] initWithFrame:hiloFrame];
+hiloLabel<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];
+hiloLabel<span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> whiteColor];
+hiloLabel<span class="variable">.text</span> = <span class="string">@"0° / 0°"</span>;
+hiloLabel<span class="variable">.font</span> = [<span class="built_in">UIFont</span> fontWithName:<span class="string">@"HelveticaNeue-Light"</span> size:<span class="number">28</span>];
+[header addSubview:hiloLabel];
+
+<span class="comment">// top</span>
+<span class="built_in">UILabel</span> *cityLabel = [[<span class="built_in">UILabel</span> alloc] initWithFrame:CGRectMake(<span class="number">0</span>, <span class="number">20</span>, <span class="keyword">self</span><span class="variable">.view</span><span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="number">30</span>)];
+cityLabel<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];
+cityLabel<span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> whiteColor];
+cityLabel<span class="variable">.text</span> = <span class="string">@"Loading..."</span>;
+cityLabel<span class="variable">.font</span> = [<span class="built_in">UIFont</span> fontWithName:<span class="string">@"HelveticaNeue-Light"</span> size:<span class="number">18</span>];
+cityLabel<span class="variable">.textAlignment</span> = NSTextAlignmentCenter;
+[header addSubview:cityLabel];
+
+<span class="built_in">UILabel</span> *conditionsLabel = [[<span class="built_in">UILabel</span> alloc] initWithFrame:conditionsFrame];
+conditionsLabel<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];
+conditionsLabel<span class="variable">.font</span> = [<span class="built_in">UIFont</span> fontWithName:<span class="string">@"HelveticaNeue-Light"</span> size:<span class="number">18</span>];
+conditionsLabel<span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> whiteColor];
+[header addSubview:conditionsLabel];
+
+<span class="comment">// 3</span>
+<span class="comment">// bottom left</span>
+<span class="built_in">UIImageView</span> *iconView = [[<span class="built_in">UIImageView</span> alloc] initWithFrame:iconFrame];
+iconView<span class="variable">.contentMode</span> = UIViewContentModeScaleAspectFit;
+iconView<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];
+[header addSubview:iconView];
+</code></pre><p>代码很多，不过也确实做了很多事来设置你多样的试图，简单的解释：</p>
+<ol>
+<li>再表头设置当前状态。</li>
+<li>创建每个需要展现天气的标签。</li>
+<li>添加一个用于放置天气图标的图片试图。</li>
+</ol>
+<p>给列表一个轻推事件，当你滑动时应该有个反弹。</p>
+<h3 id="获取天气数据">获取天气数据</h3>
+<p>你会发现虽然画面显示了loading，不过没有任何反应，是时候获取一些真实的天气状况啦。</p>
+<p>从<strong>OpenWeatherMap</strong>提供的api获取数据。OpenWeatherMap是一个很好的免费为大家提供实时精准的天气数据。它有很多种天气接口，不过大多数是用了类似XML的过时的技术，或者有些是需要付费的，而且很贵。</p>
+<p>根据下列步骤来获得天气数据：</p>
+<ol>
+<li>获取设备地址。</li>
+<li>下载json格式的天气数据</li>
+<li>匹配数据</li>
+<li>通知ui有新的数据</li>
+</ol>
+<p>先创建天气模型和数据管理类。取名<strong>WXCLient</strong>，继承<strong>NSObject</strong>.</p>
+<p>用同样的方式做下列三件事：</p>
+<ul>
+<li><strong>WXManager</strong>继承<strong>NSObject</strong>。</li>
+<li><strong>WXCondition</strong>继承<strong>MTLModel</strong>。</li>
+<li><strong>WXDailyForecast</strong>继承<strong>WXConditon</strong>。</li>
+</ul>
+<p>所有都做完后，可以开始下一个步骤，匹配和转换天气数据模型。</p>
+<h3 id="创建天气模型">创建天气模型</h3>
+<p>用<strong>Mantle</strong>来让你更简单的实现数据匹配和值转换，打开<strong>WXCondition.h</strong>像下面一样修改接口：</p>
+<pre><code><span class="comment">// 1</span>
+<span class="class"><span class="keyword">@interface</span> <span class="title">WXCondition</span> : <span class="title">MTLModel</span> &lt;<span class="title">MTLJSONSerializing</span>&gt;</span>
+
+<span class="comment">// 2</span>
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSDate</span> *date;
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSNumber</span> *humidity;
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSNumber</span> *temperature;
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSNumber</span> *tempHigh;
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSNumber</span> *tempLow;
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSString</span> *locationName;
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSDate</span> *sunrise;
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSDate</span> *sunset;
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSString</span> *conditionDescription;
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSString</span> *condition;
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSNumber</span> *windBearing;
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSNumber</span> *windSpeed;
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSString</span> *icon;
+
+<span class="comment">// 3</span>
+- (<span class="built_in">NSString</span> *)imageName;
+
+<span class="keyword">@end</span>
+</code></pre><p>同样的，有很多设置代码，跟着注释编号，逐条解释：</p>
+<ol>
+<li><strong>MTLjsonSetializing</strong>协议用来告诉Mantle这个对象能够把json格式的数据匹配成O_C的属性。</li>
+<li>这些是所有的天气数据属性，你会用到一些，不过最好还是全部添加上去能够让你方便的扩展。</li>
+<li>一个简单的用于匹配天气状况和图片的方法。</li>
+</ol>
+<p>运行你会发现出现错误了，你还没有引入<strong>MTLModel.h</strong>文件。重新编译，会出现一些新的警告，忽略就行。</p>
+<p>先实现<strong> -imageName</strong>方法，打开<strong>WXCondition.m</strong>添加下列代码：</p>
+<pre><code>+ (<span class="built_in">NSDictionary</span> *)imageMap {
+    <span class="comment">// 1</span>
+    <span class="keyword">static</span> <span class="built_in">NSDictionary</span> *_imageMap = <span class="literal">nil</span>;
+    <span class="keyword">if</span> (! _imageMap) {
+        <span class="comment">// 2</span>
+        _imageMap = @{
+                      <span class="string">@"01d"</span> : <span class="string">@"weather-clear"</span>,
+                      <span class="string">@"02d"</span> : <span class="string">@"weather-few"</span>,
+                      <span class="string">@"03d"</span> : <span class="string">@"weather-few"</span>,
+                      <span class="string">@"04d"</span> : <span class="string">@"weather-broken"</span>,
+                      <span class="string">@"09d"</span> : <span class="string">@"weather-shower"</span>,
+                      <span class="string">@"10d"</span> : <span class="string">@"weather-rain"</span>,
+                      <span class="string">@"11d"</span> : <span class="string">@"weather-tstorm"</span>,
+                      <span class="string">@"13d"</span> : <span class="string">@"weather-snow"</span>,
+                      <span class="string">@"50d"</span> : <span class="string">@"weather-mist"</span>,
+                      <span class="string">@"01n"</span> : <span class="string">@"weather-moon"</span>,
+                      <span class="string">@"02n"</span> : <span class="string">@"weather-few-night"</span>,
+                      <span class="string">@"03n"</span> : <span class="string">@"weather-few-night"</span>,
+                      <span class="string">@"04n"</span> : <span class="string">@"weather-broken"</span>,
+                      <span class="string">@"09n"</span> : <span class="string">@"weather-shower"</span>,
+                      <span class="string">@"10n"</span> : <span class="string">@"weather-rain-night"</span>,
+                      <span class="string">@"11n"</span> : <span class="string">@"weather-tstorm"</span>,
+                      <span class="string">@"13n"</span> : <span class="string">@"weather-snow"</span>,
+                      <span class="string">@"50n"</span> : <span class="string">@"weather-mist"</span>,
+                      };
+    }
+    <span class="keyword">return</span> _imageMap;
+}
+
+<span class="comment">// 3</span>
+- (<span class="built_in">NSString</span> *)imageName {
+    <span class="keyword">return</span> [WXCondition imageMap][<span class="keyword">self</span><span class="variable">.icon</span>];
+}
+</code></pre><p>解释一下：</p>
+<ol>
+<li>创建一个静态的NSDictionary用于存放<strong>WXConditon</strong></li>
+<li>匹配每一种状态。</li>
+<li>声明一个消息来获得图像名称。</li>
+</ol>
+<p>仍然在这个文件中声明一个遵循<strong>MTLJSONSerializing</strong>协议的<strong> +JSONKeyPathsByPropertyKey</strong>方法用于匹配json格式的数据。</p>
+<pre><code>+ (<span class="built_in">NSDictionary</span> *)JSONKeyPathsByPropertyKey {
+    <span class="keyword">return</span> @{
+             <span class="string">@"date"</span>: <span class="string">@"dt"</span>,
+             <span class="string">@"locationName"</span>: <span class="string">@"name"</span>,
+             <span class="string">@"humidity"</span>: <span class="string">@"main.humidity"</span>,
+             <span class="string">@"temperature"</span>: <span class="string">@"main.temp"</span>,
+             <span class="string">@"tempHigh"</span>: <span class="string">@"main.temp_max"</span>,
+             <span class="string">@"tempLow"</span>: <span class="string">@"main.temp_min"</span>,
+             <span class="string">@"sunrise"</span>: <span class="string">@"sys.sunrise"</span>,
+             <span class="string">@"sunset"</span>: <span class="string">@"sys.sunset"</span>,
+             <span class="string">@"conditionDescription"</span>: <span class="string">@"weather.description"</span>,
+             <span class="string">@"condition"</span>: <span class="string">@"weather.main"</span>,
+             <span class="string">@"icon"</span>: <span class="string">@"weather.icon"</span>,
+             <span class="string">@"windBearing"</span>: <span class="string">@"wind.deg"</span>,
+             <span class="string">@"windSpeed"</span>: <span class="string">@"wind.speed"</span>
+             };
+}
+</code></pre><p>在这个例子中，dictionary的key就是<strong>WXCondition</strong>的属性，dictionary的value就是json的值。</p>
+<p>你会发现从JSON数据匹配到O_C属性有些冲突，比如说属性 date是NSDate类型的，而JSON的是整型的。这时就需要进行一些转换。</p>
+<p>Mantle的一个特性能解决这个问题：<strong>MTLValueTransformer</strong>。这个类让你声明一个块解决怎么转换值。</p>
+<p>Mantle转换的语法有一点点奇怪，给特殊的属性写一个转换函数，创建一个以属性名字开始以<strong>JSONTransformer</strong>结尾的类方法。</p>
+<p>看比解释更直观，所以加上下列代码到<strong>WXCondition.m</strong></p>
+<pre><code>+ (NSValueTransformer *)dateJSONTransformer {
+    <span class="comment">// 1</span>
+    <span class="keyword">return</span> [MTLValueTransformer reversibleTransformerWithForwardBlock:^(<span class="built_in">NSString</span> *str) {
+        <span class="keyword">return</span> [<span class="built_in">NSDate</span> dateWithTimeIntervalSince1970:str<span class="variable">.floatValue</span>];
+    } reverseBlock:^(<span class="built_in">NSDate</span> *date) {
+        <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%f"</span>,[date timeIntervalSince1970]];
+    }];
+}
+
+<span class="comment">// 2</span>
++ (NSValueTransformer *)sunriseJSONTransformer {
+    <span class="keyword">return</span> [<span class="keyword">self</span> dateJSONTransformer];
+}
+
++ (NSValueTransformer *)sunsetJSONTransformer {
+    <span class="keyword">return</span> [<span class="keyword">self</span> dateJSONTransformer];
+}
+</code></pre><p>下面是注释：</p>
+<ol>
+<li>用代码快转换值返回一个<strong>MTLValueTransformers</strong>值</li>
+<li>你只需要知道一次怎么转换，其他可以复用。</li>
+</ol>
+<p>下一个值转换有点难理解，不过是一个简单的使用OpenWeatherMap的接口然后进行值转换的结果。天气值是一个JSON格式的数组，不过你只需要关注其中的一条。</p>
+<p>用上诉方法，添加下列代码来实现：</p>
+<pre><code>+ (NSValueTransformer *)conditionDescriptionJSONTransformer {
+    <span class="keyword">return</span> [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSArray *values) {
+        <span class="keyword">return</span> [values firstObject];
+    } reverseBlock:^(NSString *<span class="keyword">str</span>) {
+        <span class="keyword">return</span> @[<span class="keyword">str</span>];
+    }];
+}
+
++ (NSValueTransformer *)conditionJSONTransformer {
+    <span class="keyword">return</span> [<span class="keyword">self</span> conditionDescriptionJSONTransformer];
+}
+
++ (NSValueTransformer *)iconJSONTransformer {
+    <span class="keyword">return</span> [<span class="keyword">self</span> conditionDescriptionJSONTransformer];
+}
+</code></pre><p>最后一个转换只是一种习俗，接口提供的风速是m/s，考虑到你的系统是英式风格，转换成里没小时。添加下列方法和宏定义到<strong>WXConditon.m</strong>里。</p>
+<pre><code><span class="comment">#define MPS_TO_MPH 2.23694f</span>
+
++ (NSValueTransformer <span class="keyword">*</span>)windSpeedJSONTransformer {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSNumber <span class="keyword">*</span>num) {
+        return <span class="comment">@(num.floatValue*MPS_TO_MPH);</span>
+    } reverseBlock:^(NSNumber <span class="keyword">*</span>speed) {
+        return <span class="comment">@(speed.floatValue/MPS_TO_MPH);</span>
+    }];
+}
+</code></pre><p>你需要处理的天气接口数据有一点点的小差异，注意下实时情况和每日预报的数据：</p>
+<pre><code><span class="comment">// current</span>
+<span class="string">"main"</span>: {
+    <span class="string">"grnd_level"</span>: <span class="number">1021.87</span>,
+    <span class="string">"humidity"</span>: <span class="number">64</span>,
+    <span class="string">"pressure"</span>: <span class="number">1021.87</span>,
+    <span class="string">"sea_level"</span>: <span class="number">1030.6</span>,
+    <span class="string">"temp"</span>: <span class="number">58.09</span>,
+    <span class="string">"temp_max"</span>: <span class="number">58.09</span>,
+    <span class="string">"temp_min"</span>: <span class="number">58.09</span>
+}
+
+<span class="comment">// daily forecast</span>
+<span class="string">"temp"</span>: {
+    <span class="string">"day"</span>: <span class="number">58.14</span>,
+    <span class="string">"eve"</span>: <span class="number">58.14</span>,
+    <span class="string">"max"</span>: <span class="number">58.14</span>,
+    <span class="string">"min"</span>: <span class="number">57.18</span>,
+    <span class="string">"morn"</span>: <span class="number">58.14</span>,
+    <span class="string">"night"</span>: <span class="number">57.18</span>
+}
+</code></pre><p>实时的第一个健是main最高温度是temp_max而预报的是temp和max，除了这其他都一样，所以需要改变健名来匹配正确，打开<strong>WXDaikyForecast.m</strong>重写<strong>JSONKeyPathsByPropertyKey</strong>方法：</p>
+<pre><code>+ (<span class="built_in">NSDictionary</span> *)JSONKeyPathsByPropertyKey {
+    <span class="comment">// 1</span>
+    <span class="built_in">NSMutableDictionary</span> *paths = [[<span class="keyword">super</span> JSONKeyPathsByPropertyKey] mutableCopy];
+    <span class="comment">// 2</span>
+    paths[<span class="string">@"tempHigh"</span>] = <span class="string">@"temp.max"</span>;
+    paths[<span class="string">@"tempLow"</span>] = <span class="string">@"temp.min"</span>;
+    <span class="comment">// 3</span>
+    <span class="keyword">return</span> paths;
+}
+</code></pre><p>这也会覆盖WXCondition的方法，下面是注释：</p>
+<ol>
+<li>获得<strong>WXCondition</strong>的复制</li>
+<li>改变最大和最小健名来匹配每日预报</li>
+<li>返回一个新的映射</li>
+</ol>
+<p>编译一下确保没有错。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2014-07-27T06:17:28.000Z"><a href="/2014/07/27/搭建个人博客最佳实践/">7月 27 2014</a></time>
       
       
