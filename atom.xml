@@ -4,7 +4,7 @@
   <subtitle><![CDATA[HoHo~ 萌萌da技术博客!!!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://tracyone.com/"/>
-  <updated>2014-08-06T12:25:45.971Z</updated>
+  <updated>2014-08-06T12:28:01.375Z</updated>
   <id>http://tracyone.com/</id>
   
   <author>
@@ -15,14 +15,12 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[]]></title>
+    <title><![CDATA[优秀的ios7实践：天气应用学习（上）]]></title>
     <link href="http://tracyone.com/2014/08/06/%E4%BC%98%E7%A7%80%E7%9A%84ios7%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%A4%A9%E6%B0%94%E5%BA%94%E7%94%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%8A%EF%BC%89/"/>
     <id>http://tracyone.com/2014/08/06/优秀的ios7实践：天气应用学习（上）/</id>
-    <published>2014-08-06T12:25:32.000Z</published>
-    <updated>2014-08-06T12:25:32.000Z</updated>
-    <content type="html"><![CDATA[<p>title: 优秀的ios7实践：天气应用学习（上）<br>date: 2014-08-06 20:18:05<br>tags:<br>-ios<br>categories: </p>
-<h2 id="-IOS">-IOS</h2>
-<h1 id="优秀的ios7实践：天气应用学习（上）">优秀的ios7实践：天气应用学习（上）</h1>
+    <published>2014-08-06T12:18:05.000Z</published>
+    <updated>2014-08-06T12:27:56.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="优秀的ios7实践：天气应用学习（上）">优秀的ios7实践：天气应用学习（上）</h1>
 <h3 id="写在开头的话">写在开头的话</h3>
 <p>整整三个礼拜，曾自信的以为能够翻译全文的，结果还是只完成了上半部分，中间断断续续，不管怎么说还是坚持了下来。就是图片没有，可以参考<a href="http://www.raywenderlich.com/55384/ios-7-best-practices-part-1" target="_blank" rel="external">译文</a> </p>
 <p>发现看懂英文和翻译成比较顺口的文章还是有差别的，希望以后能够大大的提高自己的英语口语水平。</p>
@@ -521,15 +519,17 @@ iconView<span class="variable">.backgroundColor</span> = [<span class="built_in"
 </ol>
 <p>编译一下确保没有错。</p>
 ]]></content>
-    <summary type="html"><![CDATA[<p>title: 优秀的ios7实践：天气应用学习（上）<br>date: 2014-08-06 20:18:05<br>tags:<br>-ios<br>categories: </p>
-<h2 id="-IOS">-IOS</h2>
-<h1 id="优秀的ios7实践：天气应用学习（上）">优秀的ios7实践：天气应用学习（上）</h1>
+    <summary type="html"><![CDATA[<h1 id="优秀的ios7实践：天气应用学习（上）">优秀的ios7实践：天气应用学习（上）</h1>
 <h3 id="写在开头的话">写在开头的话</h3>
 <p>整整三个礼拜，曾自信的以为能够翻译全文的，结果还是只完成了上半部分，中间断断续续，不管怎么说还是坚持了下来。就是图片没有，可以参考<a href="http://www.raywenderlich.com/55384/ios-7-best-practices-part-1" target="_blank" rel="external">译文</a> </p>
 <p>发现看懂英文和翻译成比较顺口的文章还是有差别的，希望以后能够大大的提高自己的英语口语水平。</p>
 <p>还有上次说的ruby计划已经泡汤，不知道合适才能重拾ruby，下一次准备发一篇对设计模式的理解，和最近再研究的<strong>reactivecocoa</strong></p>
 <p><a href="http://www.raywenderlich.com/55384/ios-7-best-practices-part-1" target="_blank" rel="external">译文</a> 作者：Ryan Nystrom</p>
 <p>]]></summary>
+    
+      <category term="ios" scheme="http://tracyone.com/tags/ios/"/>
+    
+      <category term="IOS" scheme="http://tracyone.com/categories/IOS/"/>
     
   </entry>
   
@@ -602,7 +602,7 @@ iconView<span class="variable">.backgroundColor</span> = [<span class="built_in"
     <link href="http://tracyone.com/2014/07/26/%E5%B7%A5%E4%BD%9C%E4%B8%80%E4%B8%AA%E6%9C%88%E6%80%BB%E7%BB%93%EF%BC%88%E5%86%8D%E5%8A%A0%E4%B8%8A%E4%B8%80%E7%82%B9%E7%82%B9iOS%E5%BF%83%E5%BE%97%EF%BC%89/"/>
     <id>http://tracyone.com/2014/07/26/工作一个月总结（再加上一点点iOS心得）/</id>
     <published>2014-07-26T13:23:01.000Z</published>
-    <updated>2014-08-06T12:21:12.000Z</updated>
+    <updated>2014-08-06T12:27:54.000Z</updated>
     <content type="html"><![CDATA[<p>转眼间大学已经毕业，总是伴着些许忧桑，其实也还好，离家很近。细数过往发现，其实我从没走出过家乡，小学、初中、高中、甚至是大学，最远的最远竟是苏州城里－－也算是进城了。</p>
 <p>踏入社会的的滋味复杂而苦涩，总是伴随着挫折渐渐成长，总结下这一年实习和一个月工作所得所失：</p>
 <h3 id="像一个成年人去思考">像一个成年人去思考</h3>
