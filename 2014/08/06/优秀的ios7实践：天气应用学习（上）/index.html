@@ -56,7 +56,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-08-06T12:22:09.000Z"><a href="/2014/08/06/优秀的ios7实践：天气应用学习（上）/">8月 6 2014</a></time>
+        <time datetime="2014-08-06T12:25:32.000Z"><a href="/2014/08/06/优秀的ios7实践：天气应用学习（上）/">8月 6 2014</a></time>
       
       
   
@@ -70,11 +70,11 @@
 <h2 id="-IOS">-IOS</h2>
 <h1 id="优秀的ios7实践：天气应用学习（上）">优秀的ios7实践：天气应用学习（上）</h1>
 <h3 id="写在开头的话">写在开头的话</h3>
-<p>整整三个礼拜，曾自信的以为能够翻译全文的，结果还是只完成了上半部分，中间断断续续，不管怎么说还是坚持了下来。</p>
+<p>整整三个礼拜，曾自信的以为能够翻译全文的，结果还是只完成了上半部分，中间断断续续，不管怎么说还是坚持了下来。就是图片没有，可以参考<a href="http://www.raywenderlich.com/55384/ios-7-best-practices-part-1" target="_blank" rel="external">译文</a> </p>
 <p>发现看懂英文和翻译成比较顺口的文章还是有差别的，希望以后能够大大的提高自己的英语口语水平。</p>
 <p>还有上次说的ruby计划已经泡汤，不知道合适才能重拾ruby，下一次准备发一篇对设计模式的理解，和最近再研究的<strong>reactivecocoa</strong></p>
 <p><a href="http://www.raywenderlich.com/55384/ios-7-best-practices-part-1" target="_blank" rel="external">译文</a> 作者：Ryan Nystrom</p>
-<p>每个开发者对于如何去创建一个优秀的ios应用都有他们的想法。有些开发者利用自动布局，有些喜欢用代码写ui，甚至有些喜欢用vim来编码。</p>
+<p><a id="more"></a><br>每个开发者对于如何去创建一个优秀的ios应用都有他们的想法。有些开发者利用自动布局，有些喜欢用代码写ui，甚至有些喜欢用vim来编码。</p>
 <p>随着最近ios7和xcode5升级，我觉得是时候提供一个教学用多种方法和工具创建一个基础的天气应用；你可以把这看成是我最好的一次ios7实践。ios先驱开发者习惯创建一个待办应用，然而新生代希望像ios的更新一样娴熟的用新的技术，例如，数据管理和网络请求等。</p>
 <p> 在这个教程中，你会学会怎么利用下列工具和知识创建你自己的app：</p>
 <ul>
@@ -95,7 +95,7 @@
 <p><strong><a href="https://github.com/lukabernardi/LBBlurredImage" target="_blank" rel="external">LBBlurredImage</a></strong>是一个用来处理图片模糊的UIImageView的扩展。你能用一行简单的代码达到模糊效果，如果想知道原理，下载<a href="https://github.com/lukabernardi/LBBlurredImage/blob/master/LBBlurredImage/UIImageView%2BLBBlurredImage.m#L25-88" target="_blank" rel="external">源码</a>。</p>
 <h3 id="TSMessages">TSMessages</h3>
 <p><strong><a href="https://github.com/toursprung/TSMessages" target="_blank" rel="external">TSMessages</a></strong> 是又一个用来弹出显示警告和通知的轻量级库。当你呈现的错误信息不够清晰的时候，展示一层透明警告栏而不是模板试图（例如 UIAlertView）来尽可能减少用户的反感。</p>
-<p>你可以在网络连接失败或者APl引起的其他错误时使用TSMessages。如果出了任何问题，你会看到：<br><img src="./TSMessage.png" alt="Alt text"></p>
+<p>你可以在网络连接失败或者APl引起的其他错误时使用TSMessages。如果出了任何问题，你会看到：</p>
 <h3 id="ReactiveCocoa">ReactiveCocoa</h3>
 <p>你会用到最后一个也是由Github团队编写的库就是<strong><a href="https://github.com/ReactiveCocoa/ReactiveCocoa" target="_blank" rel="external">ReactiveCocoa</a></strong>。它带来了就像.NET中的Reactive Extensions一样在oc 中的一种设计模式，你将会花大量时间来学习它。</p>
 <h2 id="设置你的Cocoapods库">设置你的Cocoapods库</h2>
@@ -128,9 +128,9 @@
 <p>Analyzing dependencies<br>Downloading dependencies<br>Installing HexColors (2.2.1)<br>Installing LBBlurredImage (0.2.0)<br>Installing Mantle (1.5)<br>Installing ReactiveCocoa (2.3.1)<br>Installing TSMessages (0.9.9)<br>Generating Pods project<br>Integrating client project<br>[!] From now on use <code>SimpleWeather.xcworkspace</code>.</p>
 </blockquote>
 <p>Cocoapods会在你的项目目录中创建一个新的分支；不过你只需要关心<strong>SimpleWeather.xcworkspace</strong>.</p>
-<p>打开<strong>SimpleWeather.xcworkspace</strong>，你会看到每个你引入的库和pods项目：<br><img src="./1406077531612.png" alt="Alt text"></p>
-<p>如下图一样确保你选中了<strong>SimpleWeather</strong>项目：<br><img src="./1406077589471.png" alt="Alt text"></p>
-<p>运行一下以确保每件事都顺利进行着：<br><img src="./A674CE16-1DF7-4021-8C61-91EC9AEDA6D7.png" alt="Alt text"></p>
+<p>打开<strong>SimpleWeather.xcworkspace</strong>，你会看到每个你引入的库和pods项目：</p>
+<p>如下图一样确保你选中了<strong>SimpleWeather</strong>项目：</p>
+<p>运行一下以确保每件事都顺利进行着：</p>
 <p>现在看上去好像不太对，不过你马上就会添加一些内容。</p>
 <blockquote>
 <p><strong>Note:</strong> 你可能会发现一些警告，那是因为项目中引入了一些其他开发者的库，每个开发者对于警告都有自己的忍耐程度。大多数时间只需要忽略它们，只需要确保没有编译错误！</p>
@@ -138,7 +138,7 @@
 <h2 id="创建你的主试图">创建你的主试图</h2>
 <p>应用看上去很复杂，其实也就一个试图控制器，接下来你会增加一个。</p>
 <p>选中项目，点击<strong>File\New\File</strong>然后选择<strong>CocopTouch\Objective-C</strong>，取名<strong>WXController</strong>，继承<strong>UIViewController</strong>。</p>
-<p>确保<strong>Targeted for iPad</strong> 和 <strong>With XIB for user interface</strong>都没选：<br><img src="./1406251719497.png" alt="Alt text"></p>
+<p>确保<strong>Targeted for iPad</strong> 和 <strong>With XIB for user interface</strong>都没选：</p>
 <p>打开<strong>WXController.m</strong> 在<strong>-viewDidLoad</strong>方法中如下重写：</p>
 <blockquote>
 <p> -(void)viewDidLoad{<br>    [super viewDidLoad]<br>    self.view.backgroundColor = [UIColor redColor];<br>}</p>
@@ -187,7 +187,6 @@
 <p>等等，别发飙，其实有很多种方法来创建视图个人有各自的偏好，Storyboard,NIBs还有code都有反对和支持者。</p>
 <p>这个应用的视图不是很复杂，也没有什么触发事件会导致自动布局异常，而且这个应用是用来学习的，还是选择代码布局。</p>
 <p>你会创建三层视图来达到一开始你看的那种动画效果，下面是一个模型，tableview的外观会改变。</p>
-<p><img src="./1406510556629.png" alt="Alt text"></p>
 <p>为了实现动态模糊效果，在滑动视图的时候需要改alpha</p>
 <p>打开<strong>WXController</strong>用下列代码替换<strong> viewDidLoad</strong>中的来设置背景颜色：</p>
 <pre><code><span class="comment">// 1</span>
@@ -281,7 +280,6 @@
     <span class="keyword">self</span><span class="variable">.tableView</span><span class="variable">.frame</span> = bounds;
 }
 </code></pre><p>试图控制器用上述代码来布局<strong>WXController.m</strong>的子试图。建立并运行来看看你的试图。</p>
-<p><img src="./1406768968241.png" alt="Alt text"></p>
 <p>仔细看，你会发现有些一些不透明的分割线。仍然在 <strong>-viewDidLoad</strong>加入下列代码来布局：</p>
 <pre><code><span class="comment">// 1</span>
 <span class="built_in">CGRect</span> headerFrame = [UIScreen mainScreen]<span class="variable">.bounds</span>;
