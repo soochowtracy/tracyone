@@ -1,0 +1,282 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>内存管理 | TracyOne&#39;s Blog</title>
+  <meta name="author" content="Tracy One">
+  
+  <meta name="description" content="IOS">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="内存管理"/>
+  <meta property="og:site_name" content="TracyOne&#39;s Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">TracyOne&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">		
+			<h1> 内存管理</h1>
+		</div>		
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div class="col-md-9">
+	
+
+			
+
+	<!-- content -->
+	<div class="mypage">		
+	    <h3 id="前言">前言</h3>
+<p>大学时就已经接触过内存管理，不过和大多数同学一样，感觉没啥用啊，不知道用来干嘛，随着技术那么一丢丢的提升，越发的觉得内存管理的重要性，恰巧这次面试也碰到了，整理了下objective_c中常用的内存管理方式以及一点点自己的心得。</p>
+<p><a id="more"></a></p>
+<h3 id="一点点基础">一点点基础</h3>
+<p>先说说程序运行时内存的分布情况吧：</p>
+<ol>
+<li>栈：一般的局部变量，函数的行参都是存放在栈中，由操作系统来自动分配和销毁，效率比较高。</li>
+<li>堆：运行时才能决定分配大小，由自己来分配和销毁，也是支撑起多态的根本。</li>
+<li>代码区：由你编写的代码编译成二进制后存放的区域</li>
+<li>常量区：就是常量呀</li>
+<li>全局区：全局变量或者静态变量存放的区域</li>
+</ol>
+<p>内存分配：</p>
+<ul>
+<li>静态存储区域分配，编译时已知分配大小</li>
+<li>在栈上创建   运行时已知分配大小</li>
+<li>从堆上分配   运行时还未知。</li>
+</ul>
+<h3 id="MRC,autoreleasepool，ARC">MRC,autoreleasepool，ARC</h3>
+<p>引用计数的内存管理思考方式：</p>
+<ol>
+<li>自己生成的对象，自己持有</li>
+<li>非自己生成的对象，自己也能持有</li>
+<li>不再需要自己持有的对象，自己释放</li>
+<li>非自己持有的对象无法释放</li>
+</ol>
+<h4 id="MRC：">MRC：</h4>
+<p>分别对应了NSObject的alloc/retain/release/dealloc操作。</p>
+<p>alloc 操作其实调用的是c语言中的calloc操作，在内存快中写入了retain count，并且内容指为nil。retain操作就是加入了异常处理的retaincount++,release操作就是retaincount—，而当retaincount为0的时候，自动调用了free操作，也就是dealloc。</p>
+<h4 id="autorelease：">autorelease：</h4>
+<p>可以这么理解，autorelease对象就像局部变量一样，在生命周期结束的时候自动释放，不过autorelease对象是可以设定作用域的。</p>
+<p>autorelease对象其实就是调用了autoreleasePool对象的addObject方法。而autoreleasePool和局部变量一样在生命周期结束时自动调用drain方法，会release所有持有的对象。</p>
+<h4 id="ARC：">ARC：</h4>
+<ul>
+<li>_strong来强引用对象，能够持有对象</li>
+<li>_weak弱引用对象，不能持有，避免循环引用</li>
+<li>_unsafe_unretain大多数情况和_weak一样,不过在对象释放时不会指向nil，造成悬空指针（不属于编译器的管理对象）</li>
+<li>_autorelease一般不用，不显式注册也能起到作用，使用@autoreleasepool来代NSAutoreleasePool</li>
+</ul>
+<h3 id="深入内存机制">深入内存机制</h3>
+<p>操作系统这本书上解释的很清楚了，其实我也不是很懂。。。就在这里说点闲话了</p>
+<p>找工作，尤其是第一份工作需要慎重考虑，薪水不是关键，找准自己的方向，能够切合自己的兴趣更好。总是有舍有得，从今天开始，又是新的一天，</p>
+<p>学习最可怕的不是你不努力，而是方向就错了，很庆幸能够找到一条属于自己的路，虽然未来会很坎坷。</p>
+<p>（再也不想预测下一篇博客会写什么，貌似没有一次是准的）</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+        
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2014/08/06/优秀的ios7实践：天气应用学习（上）/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+	
+	</div> <!-- col-md-9/col-md-12 -->
+	
+	
+		<div class="col-md-3"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	8月 16 2014 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/IOS/">IOS<span>3</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/内存/">内存<span>1</span></a></li> <li><a href="/tags/ios/">ios<span>3</span></a></li> <li><a href="/tags/ARC/">ARC<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	
+
+</div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2014 Tracy One
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'tracyone';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+   </html>
