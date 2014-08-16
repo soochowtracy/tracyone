@@ -18,55 +18,92 @@
     <meta property="og:image" content="undefined"/>
   
 
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="TracyOne&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
   
 
 </head>
 
-
-<body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">TracyOne&#39;s Blog</a></h1>
-  <h2><a href="/">HoHo~ 萌萌da技术博客!!!</a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-
-    
-      <li><a href="/archives">Archives</a></li>
-
-    
-      <li><a href="/aboutme">About Me</a></li>
-
-    
-    <li> <a href="/atom.xml">RSS</a> </li>
-  </ul>
-  <div class="clearfix"></div>
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">TracyOne&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
 </nav>
-<div class="clearfix"></div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2014-08-06T12:18:05.000Z"><a href="/2014/08/06/优秀的ios7实践：天气应用学习（上）/">8月 6 2014</a></time>
-      
-      
-  
-    <h1 class="title">优秀的ios7实践：天气应用学习（上）</h1>
-  
+<div class="clearfix"></div>
 
-    </header>
-    <div class="entry">
-      
-        <h3 id="写在开头的话">写在开头的话</h3>
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">		
+			<h1> 优秀的ios7实践：天气应用学习（上）</h1>
+		</div>		
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div class="col-md-9">
+	
+
+			
+
+	<!-- content -->
+	<div class="mypage">		
+	    <h3 id="写在开头的话">写在开头的话</h3>
 <p>整整三个礼拜，曾自信的以为能够翻译全文的，结果还是只完成了上半部分，中间断断续续，不管怎么说还是坚持了下来。就是图片没有，可以参考<a href="http://www.raywenderlich.com/55384/ios-7-best-practices-part-1" target="_blank" rel="external">译文</a> </p>
 <p>发现看懂英文和翻译成比较顺口的文章还是有差别的，希望以后能够大大的提高自己的英语口语水平。</p>
 <p>还有上次说的ruby计划已经泡汤，不知道合适才能重拾ruby，下一次准备发一篇对设计模式的理解，和最近再研究的<strong>reactivecocoa</strong></p>
@@ -563,126 +600,112 @@ iconView<span class="variable">.backgroundColor</span> = [<span class="built_in"
 <li>返回一个新的映射</li>
 </ol>
 <p>编译一下确保没有错。</p>
+	  
+	</div>
 
-      
-    </div>
-    <footer>
-      
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
         
-  
-  <div class="categories">
-    <a href="/categories/IOS/">IOS</a>
-  </div>
 
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2014/07/27/搭建个人博客最佳实践/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
-  
-  <div class="tags">
-    <a href="/tags/ios/">ios</a>
-  </div>
+	
+</ul>
+</div>
 
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
- <nav id="pagination" >
-    
-    
-    <a href="/2014/07/27/搭建个人博客最佳实践/" class="alignright next" >下一页</a>
-    
-    <div class="clearfix"></div>
-</nav>
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
 <section id="comment">
-
-<!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="tracyone.com"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"tracyone"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-     || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-  </script>
-<!-- 多说公共JS代码 end -->
-
+  <h2 class="title">留言</h2>
 
   
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="http://tracyone.com/2014/08/06/优秀的ios7实践：天气应用学习（上）/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
   
 </section>
 
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜索">
-    <input type="hidden" name="q" value="site:tracyone.com">
-  </form>
-</div>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+	
+	
+		<div class="col-md-3"> 
 
-  
-<div class="widget tag">
-  <h3 class="title">分类</h3>
-  <ul class="entry">
-  
-    <li><a href="/categories/Hexo/">Hexo</a><small>1</small></li>
-  
-    <li><a href="/categories/IOS/">IOS</a><small>2</small></li>
-  
-    <li><a href="/categories/ios/">ios</a><small>0</small></li>
-  
-  </ul>
-</div>
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	8月 6 2014 
+	</div>
+	
 
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/IOS/">IOS<span>2</span></a></li>
+  </li>
 
-  
-<div class="widget tag">
-  <h3 class="title">标签</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/IOS/">IOS</a><small>0</small></li>
-  
-    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
-  
-    <li><a href="/tags/ios/">ios</a><small>2</small></li>
-  
-  </ul>
-</div>
+    </ul>
+	</div>
+	
 
-</aside>
-    <div class="clearfix"></div>
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/ios/">ios<span>2</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	
+
+</div><!-- row -->
+
+	</div>
   </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
+  <div class="container-narrow">
+  <footer> <p>
   &copy; 2014 Tracy One
   
-</div>
-<div class="clearfix"></div></footer>
-  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
 
 
 <script type="text/javascript">
@@ -707,5 +730,6 @@ var disqus_shortname = 'tracyone';
 })(jQuery);
 </script>
 
+
 </body>
-</html>
+   </html>

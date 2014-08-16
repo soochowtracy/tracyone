@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://tracyone.com/about/index.html</loc>
+    <lastmod>2014-08-16T03:50:50.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tracyone.com/tags/index.html</loc>
+    <lastmod>2014-08-16T03:30:19.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://tracyone.com/categories/index.html</loc>
+    <lastmod>2014-08-16T03:28:06.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://tracyone.com/2014/08/06/%E4%BC%98%E7%A7%80%E7%9A%84ios7%E5%AE%9E%E8%B7%B5%EF%BC%9A%E5%A4%A9%E6%B0%94%E5%BA%94%E7%94%A8%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%8A%EF%BC%89/</loc>
     <lastmod>2014-08-06T12:31:34.000Z</lastmod>
   </url>
@@ -14,11 +29,6 @@
   <url>
     <loc>http://tracyone.com/2014/07/27/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</loc>
     <lastmod>2014-07-27T06:23:00.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://tracyone.com/aboutme/index.html</loc>
-    <lastmod>2014-07-27T04:37:03.000Z</lastmod>
   </url>
   
 </urlset>

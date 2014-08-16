@@ -18,217 +18,306 @@
     <meta property="og:image" content="undefined"/>
   
 
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="TracyOne&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
   
 
 </head>
 
-
-<body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">TracyOne&#39;s Blog</a></h1>
-  <h2><a href="/">HoHo~ 萌萌da技术博客!!!</a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-
-    
-      <li><a href="/archives">Archives</a></li>
-
-    
-      <li><a href="/aboutme">About Me</a></li>
-
-    
-    <li> <a href="/atom.xml">RSS</a> </li>
-  </ul>
-  <div class="clearfix"></div>
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">TracyOne&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
 </nav>
-<div class="clearfix"></div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2014-08-06T12:18:05.000Z"><a href="/2014/08/06/优秀的ios7实践：天气应用学习（上）/">8月 6 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/08/06/优秀的ios7实践：天气应用学习（上）/">优秀的ios7实践：天气应用学习（上）</a></h1>
-  
+<div class="clearfix"></div>
 
-    </header>
-    <div class="entry">
-      
-        <h3 id="写在开头的话">写在开头的话</h3>
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header">
+  <h1>HoHo~ 萌萌da技术博客!!!</h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+      <i class="fa fa-heart"></i>
+      Step By Step.
+</div>    
+
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+		<h3 class="title">
+			<a href="/2014/08/06/优秀的ios7实践：天气应用学习（上）/" >优秀的ios7实践：天气应用学习（上）</a>
+			<span class="date"> 8月 6 2014 </span>
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+  
+	<div class="col-md-12">
+	  
+	
+	  <h3 id="写在开头的话">写在开头的话</h3>
 <p>整整三个礼拜，曾自信的以为能够翻译全文的，结果还是只完成了上半部分，中间断断续续，不管怎么说还是坚持了下来。就是图片没有，可以参考<a href="http://www.raywenderlich.com/55384/ios-7-best-practices-part-1" target="_blank" rel="external">译文</a> </p>
 <p>发现看懂英文和翻译成比较顺口的文章还是有差别的，希望以后能够大大的提高自己的英语口语水平。</p>
 <p>还有上次说的ruby计划已经泡汤，不知道合适才能重拾ruby，下一次准备发一篇对设计模式的理解，和最近再研究的<strong>reactivecocoa</strong></p>
 <p><a href="http://www.raywenderlich.com/55384/ios-7-best-practices-part-1" target="_blank" rel="external">译文</a> 作者：Ryan Nystrom</p>
 <p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2014/08/06/优秀的ios7实践：天气应用学习（上）/#more" class="more-link">Read More</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
+	
+	</div>
+	
   
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2014-07-27T06:17:28.000Z"><a href="/2014/07/27/搭建个人博客最佳实践/">7月 27 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/07/27/搭建个人博客最佳实践/">搭建个人博客最佳实践</a></h1>
-  
+</div>
+	<a type="button" href="/2014/08/06/优秀的ios7实践：天气应用学习（上）/#more" class="btn btn-default more">阅读此文</a>
+</div>
 
-    </header>
-    <div class="entry">
-      
-        <p>只有闲得蛋疼的人才会想自己搞一个博客，好好的一个周末又浪费在pc上，所幸成功了，现分享出来装下x。</p>
+		
+			
+	
+	<!-- display as entry -->
+		<h3 class="title">
+			<a href="/2014/07/27/搭建个人博客最佳实践/" >搭建个人博客最佳实践</a>
+			<span class="date"> 7月 27 2014 </span>
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+  
+	<div class="col-md-12">
+	  
+	
+	  <p>只有闲得蛋疼的人才会想自己搞一个博客，好好的一个周末又浪费在pc上，所幸成功了，现分享出来装下x。</p>
 <h3 id="准备工作">准备工作</h3>
 <ol>
 <li>安装git</li>
 <li>安装Node.js</li>
 <li>安装hexo<br>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2014/07/27/搭建个人博客最佳实践/#more" class="more-link">Read More</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
+	
+	</div>
+	
   
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2014-07-26T13:23:01.000Z"><a href="/2014/07/26/工作一个月总结（再加上一点点iOS心得）/">7月 26 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/07/26/工作一个月总结（再加上一点点iOS心得）/">工作一个月总结（再加上一点点iOS心得）</a></h1>
-  
+</div>
+	<a type="button" href="/2014/07/27/搭建个人博客最佳实践/#more" class="btn btn-default more">阅读此文</a>
+</div>
 
-    </header>
-    <div class="entry">
-      
-        <p>转眼间大学已经毕业，总是伴着些许忧桑，其实也还好，离家很近。细数过往发现，其实我从没走出过家乡，小学、初中、高中、甚至是大学，最远的最远竟是苏州城里－－也算是进城了。</p>
+		
+			
+	
+	<!-- display as entry -->
+		<h3 class="title">
+			<a href="/2014/07/26/工作一个月总结（再加上一点点iOS心得）/" >工作一个月总结（再加上一点点iOS心得）</a>
+			<span class="date"> 7月 26 2014 </span>
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+  
+	<div class="col-md-12">
+	  
+	
+	  <p>转眼间大学已经毕业，总是伴着些许忧桑，其实也还好，离家很近。细数过往发现，其实我从没走出过家乡，小学、初中、高中、甚至是大学，最远的最远竟是苏州城里－－也算是进城了。</p>
 <p>踏入社会的的滋味复杂而苦涩，总是伴随着挫折渐渐成长，总结下这一年实习和一个月工作所得所失：</p>
 <h3 id="像一个成年人去思考">像一个成年人去思考</h3>
 <p>犹记得刚实习时，像个愣头青，习惯了口无遮拦，习惯了懒散的纪律观念，习惯了12月早上8点暖和的被窝，突然间一切都变了。</p>
 <p>再这里，你就得把自己当一条狗，你什么都不是，没有什么资本值得你去炫耀，你需要做的就是努力再努力的工作。公司和学校最本质的区别是：<strong>你给学校钱，而公司却给你钱！</strong> 你已经是一个成年人了，别伤感，只是说了个事实。</p>
 
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2014/07/26/工作一个月总结（再加上一点点iOS心得）/#more" class="more-link">Read More</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-<nav id="pagination">
+	
+	</div>
+	
   
-  
-  <div class="clearfix"></div>
-</nav></div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜索">
-    <input type="hidden" name="q" value="site:tracyone.com">
+</div>
+	<a type="button" href="/2014/07/26/工作一个月总结（再加上一点点iOS心得）/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+<ul class="pagination">
+	 
+</ul>
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			<div class="form-group has-success has-feedback">
+  <form action="//google.com/search" method="get" accept-charset="utf-8" >
+    <input type="search" name="q" results="0" placeholder="搜索" class="form-control">
+    <input type="hidden" name="q" value="site:tracyone.com">	
   </form>
 </div>
 
-  
-<div class="widget tag">
-  <h3 class="title">分类</h3>
-  <ul class="entry">
-  
-    <li><a href="/categories/Hexo/">Hexo</a><small>1</small></li>
-  
-    <li><a href="/categories/IOS/">IOS</a><small>2</small></li>
-  
-    <li><a href="/categories/ios/">ios</a><small>0</small></li>
-  
+		
+			
+	<div class="widget">
+		<h4>分类</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Hexo/">Hexo<span>1</span></a></li>
+		
+			<li><a href="/categories/IOS/">IOS<span>2</span></a></li>
+		
+			<li><a href="/categories/ios/">ios<span>0</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>标签云</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/ios/">ios<span>2</span></a></li>
+		
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/IOS/">IOS<span>0</span></a></li>
+		
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+  <h4>最新文章</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2014/08/06/优秀的ios7实践：天气应用学习（上）/" ><i class="fa fa-file-o"></i>优秀的ios7实践：天气应用学习（上）</a>
+      </li>
+    
+      <li>
+        <a href="/2014/07/27/搭建个人博客最佳实践/" ><i class="fa fa-file-o"></i>搭建个人博客最佳实践</a>
+      </li>
+    
+      <li>
+        <a href="/2014/07/26/工作一个月总结（再加上一点点iOS心得）/" ><i class="fa fa-file-o"></i>工作一个月总结（再加上一点点iOS心得）</a>
+      </li>
+    
   </ul>
 </div>
 
-
-  
-<div class="widget tag">
-  <h3 class="title">标签</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/IOS/">IOS</a><small>0</small></li>
-  
-    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
-  
-    <li><a href="/tags/ios/">ios</a><small>2</small></li>
-  
-  </ul>
+		
+			
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="fa fa-github"></i><a href="https://github.com/wzpan/freemind/" title="Freemind's Github repository." target="_blank"]);">Freemind</a></li>
+	
+		<li><i class="fa fa-github"></i><a href="https://github.com/soochowtracy" title="My Github account." target="_blank"]);">My Github</a></li>
+	
+		<li><i class="fa fa-linkedin"></i><a href="https://www.facebook.com/profile.php?id=100005776547110" title="My Linkin account." target="_blank"]);">My facebook</a></li>
+	
+	</ul>
 </div>
 
-</aside>
-    <div class="clearfix"></div>
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+	</div>
   </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
+  <div class="container-narrow">
+  <footer> <p>
   &copy; 2014 Tracy One
   
-</div>
-<div class="clearfix"></div></footer>
-  <script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
 
 
 <script type="text/javascript">
@@ -253,5 +342,6 @@ var disqus_shortname = 'tracyone';
 })(jQuery);
 </script>
 
+
 </body>
-</html>
+   </html>
