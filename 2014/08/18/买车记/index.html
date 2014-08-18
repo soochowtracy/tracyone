@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>内存管理 | TracyOne&#39;s Blog</title>
+  <title>买车记 | TracyOne&#39;s Blog</title>
   <meta name="author" content="Tracy One">
   
   <meta name="description" content="IOS">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="内存管理"/>
+  <meta property="og:title" content="买车记"/>
   <meta property="og:site_name" content="TracyOne&#39;s Blog"/>
 
   
@@ -87,7 +87,7 @@
 
 	
 		<div class="page-header">		
-			<h1> 内存管理</h1>
+			<h1> 买车记</h1>
 		</div>		
 	
 
@@ -104,49 +104,27 @@
 	<!-- content -->
 	<div class="mypage">		
 	    <h3 id="前言">前言</h3>
-<p>大学时就已经接触过内存管理，不过和大多数同学一样，感觉没啥用啊，不知道用来干嘛，随着技术那么一丢丢的提升，越发的觉得内存管理的重要性，恰巧这次面试也碰到了，整理了下objective_c中常用的内存管理方式以及一点点自己的心得。</p>
+<p>一切都来的太突然，辞职，看房，买车，最近一个礼拜伴随着压抑的缠绵的讨厌的雨，心情也是很沉重。看着父母的愁容，心里也很过意不去，唯有努力工作，好好报答了。</p>
+<p>公司离家比较远，不买车也不行了，看过去租房，还是算了，房租也够邮费了，而且以后肯定是两个人生活啊，双人租房好贵的，就这么安慰自己。。。</p>
 <p><a id="more"></a></p>
-<h3 id="一点点基础">一点点基础</h3>
-<p>先说说程序运行时内存的分布情况吧：</p>
+<h3 id="选车">选车</h3>
+<p>重点戏来了，与车结下不解之缘是一次做朋友的车，看那中控台，瞬间就中毒，本田的思域那分层设计太合胃口饿。那时候就想以后也买一台思域，那骚包的外观也很有吸引力，然后就和老爸商量，结果老爸说要SUV，好吧，开始关注SUV。。。</p>
 <ol>
-<li>栈：一般的局部变量，函数的行参都是存放在栈中，由操作系统来自动分配和销毁，效率比较高。</li>
-<li>堆：运行时才能决定分配大小，由自己来分配和销毁，也是支撑起多态的根本。</li>
-<li>代码区：由你编写的代码编译成二进制后存放的区域</li>
-<li>常量区：就是常量呀</li>
-<li>全局区：全局变量或者静态变量存放的区域</li>
+<li><p>神车途观：不得不说这是我关注最久的一款车型，但是：当我去上海大众的时候，满怀期待的心情进去，失望了，态度差的很，不但不优惠还要加装饰两万多，还要等一个月左右才能有车，像我20多岁的亢奋青年哪里受得了这点，淘汰~~</p>
+</li>
+<li><p>翼虎：真的很喜欢，差点就定了，那眯起来的眼神，太销魂了，可惜有瘸腿的风险，pass了。</p>
+</li>
+<li><p>CRV:这个性价比超高，md，结果有个光头先买了，气死了，而且那肥臀也不是我的菜，pass～</p>
+</li>
+<li><p>CRV4:喜欢就是喜欢，不在乎所谓的公主坟，猪大肠等等，中控台是一直要看到的，最好看的中控。</p>
+</li>
 </ol>
-<p>内存分配：</p>
-<ul>
-<li>静态存储区域分配，编译时已知分配大小</li>
-<li>在栈上创建   运行时已知分配大小</li>
-<li>从堆上分配   运行时还未知。</li>
-</ul>
-<h3 id="MRC,autoreleasepool，ARC">MRC,autoreleasepool，ARC</h3>
-<p>引用计数的内存管理思考方式：</p>
-<ol>
-<li>自己生成的对象，自己持有</li>
-<li>非自己生成的对象，自己也能持有</li>
-<li>不再需要自己持有的对象，自己释放</li>
-<li>非自己持有的对象无法释放</li>
-</ol>
-<h4 id="MRC：">MRC：</h4>
-<p>分别对应了NSObject的alloc/retain/release/dealloc操作。</p>
-<p>alloc 操作其实调用的是c语言中的calloc操作，在内存快中写入了retain count，并且内容指为nil。retain操作就是加入了异常处理的retaincount++,release操作就是retaincount—，而当retaincount为0的时候，自动调用了free操作，也就是dealloc。</p>
-<h4 id="autorelease：">autorelease：</h4>
-<p>可以这么理解，autorelease对象就像局部变量一样，在生命周期结束的时候自动释放，不过autorelease对象是可以设定作用域的。</p>
-<p>autorelease对象其实就是调用了autoreleasePool对象的addObject方法。而autoreleasePool和局部变量一样在生命周期结束时自动调用drain方法，会release所有持有的对象。</p>
-<h4 id="ARC：">ARC：</h4>
-<ul>
-<li>_strong来强引用对象，能够持有对象</li>
-<li>_weak弱引用对象，不能持有，避免循环引用</li>
-<li>_unsafe_unretain大多数情况和_weak一样,不过在对象释放时不会指向nil，造成悬空指针（不属于编译器的管理对象）</li>
-<li>_autorelease一般不用，不显式注册也能起到作用，使用@autoreleasepool来代NSAutoreleasePool</li>
-</ul>
-<h3 id="深入内存机制">深入内存机制</h3>
-<p>操作系统这本书上解释的很清楚了，其实我也不是很懂。。。就在这里说点闲话了</p>
-<p>找工作，尤其是第一份工作需要慎重考虑，薪水不是关键，找准自己的方向，能够切合自己的兴趣更好。总是有舍有得，从今天开始，又是新的一天，</p>
-<p>学习最可怕的不是你不努力，而是方向就错了，很庆幸能够找到一条属于自己的路，虽然未来会很坎坷。</p>
-<p>（再也不想预测下一篇博客会写什么，貌似没有一次是准的）</p>
+<h3 id="看车">看车</h3>
+<p>直奔4S店，销售很热情，小胡同学真是个不错的人（以后要买丰田的车可以找他），进了展厅，第一眼看到的却是锐志，老妈狂喜欢啊，我其实也蛮喜欢的，不过考虑到我比较魁梧，嗯，就是比较魁梧，还是看看边上的RAV-4了。</p>
+<p>第一眼，很霸气，相当霸气，打开门坐进去，高端大气，特别是双拼色，大爱啊。第一天没有定，回家商量下。然后就是各种七大姑，八大姨的建议。最终还是决定，就它了，接下来就是谈价格了，第一次比较紧张，最终也没拿到多少优惠。主要是自己买的急了，再过个那么几个月，估计加个也就下来了。。。</p>
+<h3 id="尾记">尾记</h3>
+<p>买完车，发现，自动挡不会开，这是个问题，还有万恶的邮费啊，不知道如何赚起。。。不想了，慢慢学，慢慢的，都会好的。</p>
+<p>最后感谢以下这些人给我的支持：亲人，还有那个她，还有晓赟同学，虽然最后没有买公爵，下次还是有机会的嘛。</p>
 	  
 	</div>
 
@@ -155,14 +133,14 @@
 	<div class="pagination">
 <ul class="pagination">
 	 
-				
-    	<li class="prev"><a href="/2014/08/18/买车记/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
-  		
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+        
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-		   <li class="next"><a href="/2014/08/06/优秀的ios7实践：天气应用学习（上）/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+		   <li class="next"><a href="/2014/08/16/内存管理/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
 	
 </ul>
@@ -193,7 +171,7 @@
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	8月 16 2014 
+	8月 18 2014 
 	</div>
 	
 
@@ -204,7 +182,7 @@
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/categories/IOS/">IOS<span>3</span></a></li>
+    <li><a href="/categories/生活/">生活<span>1</span></a></li>
   </li>
 
     </ul>
@@ -212,14 +190,6 @@
 	
 
 	<!-- tags -->
-	
-	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
-    <ul id="tags" class="tag_box list-unstyled collapse in">	  
-	    
-  <li><a href="/tags/内存/">内存<span>1</span></a></li> <li><a href="/tags/ios/">ios<span>3</span></a></li> <li><a href="/tags/ARC/">ARC<span>1</span></a></li>
-    </ul>
-	</div>
 		
 
 	<!-- toc -->
