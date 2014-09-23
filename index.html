@@ -105,6 +105,40 @@
 	
 	<!-- display as entry -->
 		<h3 class="title">
+			<a href="/2014/09/23/MRC&ARC进阶/" >MRC&amp;ARC进阶</a>
+			<span class="date"> 9月 23 2014 </span>
+		</h3>
+	
+
+
+			<div class="entry">
+  <div class="row">
+  
+	<div class="col-md-12">
+	  
+	
+	  <p>最近公司项目不再需要适配ios5了（3q God），终于可以使用一些比较吊的特性了，比如说Auto Layout，不过呢，这次的主题是在ios5中就有的ARC，乘着这次改版，顺带巩固和学习下ios的内存管理。</p>
+<h3 id="谈谈苹果使用过的内存管理策略">谈谈苹果使用过的内存管理策略</h3>
+<ol>
+<li>手动引用计数（MRC）：每个对象都有一个retain计数，当retain为0的时候释放对象。</li>
+<li>垃圾回收机制（GC）：主要是监视整个对象关系图，查找那些作用域内没有任何引用的对象，然后释放。</li>
+<li>自动引用计数（ARC）：也是基于手动引用计数的，不过编译器来管理。</li>
+</ol>
+<p>之所以要引入ARC，主要是因为，手动引用计数需要手动进行，增加工作量，开发时需要显示的retain和release，而且容易循环retain；而垃圾回收机制容易产生性能损耗，更何况是在手机上。</p>
+
+	
+	</div>
+	
+  
+</div>
+	<a type="button" href="/2014/09/23/MRC&ARC进阶/#more" class="btn btn-default more">阅读此文</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+		<h3 class="title">
 			<a href="/2014/09/09/KVC&KVO/" >KVC&amp;KVO</a>
 			<span class="date"> 9月 9 2014 </span>
 		</h3>
@@ -217,37 +251,6 @@
 </div>
 
 		
-			
-	
-	<!-- display as entry -->
-		<h3 class="title">
-			<a href="/2014/07/27/搭建个人博客最佳实践/" >搭建个人博客最佳实践</a>
-			<span class="date"> 7月 27 2014 </span>
-		</h3>
-	
-
-
-			<div class="entry">
-  <div class="row">
-  
-	<div class="col-md-12">
-	  
-	
-	  <p>只有闲得蛋疼的人才会想自己搞一个博客，好好的一个周末又浪费在pc上，所幸成功了，现分享出来装下x。</p>
-<h3 id="准备工作">准备工作</h3>
-<ol>
-<li>安装git</li>
-<li>安装Node.js</li>
-<li>安装hexo<br>
-	
-	</div>
-	
-  
-</div>
-	<a type="button" href="/2014/07/27/搭建个人博客最佳实践/#more" class="btn btn-default more">阅读此文</a>
-</div>
-
-		
 
 		</div>
 
@@ -296,7 +299,7 @@
 		
 			<li><a href="/categories/Hexo/">Hexo<span>1</span></a></li>
 		
-			<li><a href="/categories/IOS/">IOS<span>4</span></a></li>
+			<li><a href="/categories/IOS/">IOS<span>5</span></a></li>
 		
 			<li><a href="/categories/ios/">ios<span>0</span></a></li>
 		
@@ -311,15 +314,15 @@
 		<h4>标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/ARC/">ARC<span>1</span></a></li>
-		
-			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
-		
-			<li><a href="/tags/ios/">ios<span>4</span></a></li>
+			<li><a href="/tags/ios/">ios<span>5</span></a></li>
 		
 			<li><a href="/tags/IOS/">IOS<span>0</span></a></li>
 		
-			<li><a href="/tags/内存/">内存<span>1</span></a></li>
+			<li><a href="/tags/内存/">内存<span>2</span></a></li>
+		
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/ARC/">ARC<span>1</span></a></li>
 		
 		 
 		</ul>
@@ -331,6 +334,10 @@
 <div class="widget">
   <h4>最新文章</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2014/09/23/MRC&amp;ARC进阶/" ><i class="fa fa-file-o"></i>MRC&amp;ARC进阶</a>
+      </li>
     
       <li>
         <a href="/2014/09/09/KVC&amp;KVO/" ><i class="fa fa-file-o"></i>KVC&amp;KVO</a>
@@ -346,10 +353,6 @@
     
       <li>
         <a href="/2014/08/06/优秀的ios7实践：天气应用学习（上）/" ><i class="fa fa-file-o"></i>优秀的ios7实践：天气应用学习（上）</a>
-      </li>
-    
-      <li>
-        <a href="/2014/07/27/搭建个人博客最佳实践/" ><i class="fa fa-file-o"></i>搭建个人博客最佳实践</a>
       </li>
     
   </ul>

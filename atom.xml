@@ -4,7 +4,7 @@
   <subtitle><![CDATA[HoHo~ 萌萌da技术博客!!!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://tracyone.com/"/>
-  <updated>2014-09-16T13:58:58.896Z</updated>
+  <updated>2014-09-23T13:31:33.867Z</updated>
   <id>http://tracyone.com/</id>
   
   <author>
@@ -13,6 +13,102 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[MRC&ARC进阶]]></title>
+    <link href="http://tracyone.com/2014/09/23/MRC&ARC%E8%BF%9B%E9%98%B6/"/>
+    <id>http://tracyone.com/2014/09/23/MRC&ARC进阶/</id>
+    <published>2014-09-23T13:10:00.000Z</published>
+    <updated>2014-09-23T13:31:26.000Z</updated>
+    <content type="html"><![CDATA[<p>最近公司项目不再需要适配ios5了（3q God），终于可以使用一些比较吊的特性了，比如说Auto Layout，不过呢，这次的主题是在ios5中就有的ARC，乘着这次改版，顺带巩固和学习下ios的内存管理。</p>
+<h3 id="谈谈苹果使用过的内存管理策略">谈谈苹果使用过的内存管理策略</h3>
+<ol>
+<li>手动引用计数（MRC）：每个对象都有一个retain计数，当retain为0的时候释放对象。</li>
+<li>垃圾回收机制（GC）：主要是监视整个对象关系图，查找那些作用域内没有任何引用的对象，然后释放。</li>
+<li>自动引用计数（ARC）：也是基于手动引用计数的，不过编译器来管理。</li>
+</ol>
+<p>之所以要引入ARC，主要是因为，手动引用计数需要手动进行，增加工作量，开发时需要显示的retain和release，而且容易循环retain；而垃圾回收机制容易产生性能损耗，更何况是在手机上。</p>
+<a id="more"></a>
+
+<h3 id="简要说说MRC">简要说说MRC</h3>
+<ul>
+<li>给对象发送release消息并不会销毁对象，只有在retain计数为0的时候，才会调用dealloc方法，来释放内存。</li>
+<li>对使用了retain，copy，alloc，new的任何对象和属性，需要覆盖dealloc方法，使得对象在释放的时候能够先释放这些实例变量。</li>
+<li>autorelease比较常用的几种方式：</li>
+</ul>
+<ol>
+<li>方法返回值，由于会retain返回的对象，而又需要释放</li>
+<li>在循环中，如果需要创建大量零时对象，建议用autorelease</li>
+</ol>
+<ul>
+<li>比较常用的Accessor方法有这些：</li>
+</ul>
+<blockquote>
+<p>-(void)setFoo:(NSString *)foo{<br>    if (_foo != foo){<br>        [_foo release];<br>        _foo = [foo retain];<br>    } }</p>
+<p>-(void)setFoo:(NSString *)foo{<br>        [_foo retain];<br>        [_foo release];<br>        _foo = foo; }</p>
+<p>-(void)setFoo:(NSString *)foo{<br>        [_foo autorelease];<br>        _foo = [foo retain]; }</p>
+</blockquote>
+<p>第二个方法千万不能先release再retain，如果是同一个对象，恰好retain只有1，那么就crash啦。三个方法各有利弊吧，我比较喜欢用第一个。</p>
+<h3 id="内存管理的实现">内存管理的实现</h3>
+<ol>
+<li>id obj = [NSObject alloc]：</li>
+</ol>
+<blockquote>
+<p>struct obj_layout{<br>    NSUInteger retained; }</p>
+<p>+(id)alloc{<br>    int size = sizeOf(struct obj_layout) + 对象大小;<br>    struct obj_layout <em>p = (struct obj_layout </em>)calloc(1,size);<br>    return (id)(p + 1); }</p>
+</blockquote>
+<ol>
+<li>[obj retain]：</li>
+</ol>
+<blockquote>
+<p>-(id)retain{<br>    NSIncrementExtraRefCount(self);<br>    return self; }<br>inline void NSIncrementExtraRefCount(id anObject){<br>    ((struct obj_layout *)anObjcet)[-1].retained++; }</p>
+</blockquote>
+<ol>
+<li>[obj release]：</li>
+</ol>
+<blockquote>
+<p> -(id)release{<br>     if(NSDocumentExtraRefCountWasZero(self)){<br>            [self dealloc];<br>     }  }<br>BOOL NSDocumentExtraRefCountWasZero(id anObject){<br>    if(((struct obj_layout <em>)anObjcet)[-1].retained == 0){<br>        return YES;<br>    }else{<br>        ((struct obj_layout </em>)anObjcet)[-1].retained—;<br>        return NO;<br>    } }</p>
+</blockquote>
+<ol>
+<li>dealloc：</li>
+</ol>
+<blockquote>
+<p> -dealloc{<br>    NSDeallocateObject(self); } inline void NSDeallocateObject(id anObject){<br>    struct obj_layout <em>o = &amp;((struct obj_layout </em>)anObjcet)[-1];<br>    free(o); }</p>
+</blockquote>
+<p>总结一下，其实就是在指向对象的指针地址向低地址便宜一个retain结构体的大小，期间存放retain计数，然后alloc和retain＋1，而release如果已经为0则调用dealloc方法，否则retain－1，最终在dealloc中释放掉对象。</p>
+<h3 id="MRC转ARC的难点及步骤">MRC转ARC的难点及步骤</h3>
+<ol>
+<li>Objective-C对象和Core Foundation对象之间的转换，需要恰当的使用CFBridgeRetain/CFBridgeRelease或者_bridge_retained/_bridge_transfer转换。</li>
+<li>避免循环引用，block和delegate必须注意weak的使用,NSTimer，还有注册的观察者，在dealloc中需要注销。</li>
+</ol>
+<p>第一步：<br><img src="/pic/PastedGraphic-1.png" alt="Alt text"></p>
+<p>第二步：<br><img src="/pic/PastedGraphic-2.png" alt="Alt text"></p>
+<p>第三步：修改错误点；<br><img src="/pic/PastedGraphic-3.png" alt="Alt text"></p>
+<h3 id="总结：">总结：</h3>
+<ol>
+<li>自己生成的对象，自己持有</li>
+<li>非自己生成的对象，自己也能持有</li>
+<li>不再需要持有的对象，自己释放</li>
+<li>不是自己持有的对象不能释放</li>
+</ol>
+]]></content>
+    <summary type="html"><![CDATA[<p>最近公司项目不再需要适配ios5了（3q God），终于可以使用一些比较吊的特性了，比如说Auto Layout，不过呢，这次的主题是在ios5中就有的ARC，乘着这次改版，顺带巩固和学习下ios的内存管理。</p>
+<h3 id="谈谈苹果使用过的内存管理策略">谈谈苹果使用过的内存管理策略</h3>
+<ol>
+<li>手动引用计数（MRC）：每个对象都有一个retain计数，当retain为0的时候释放对象。</li>
+<li>垃圾回收机制（GC）：主要是监视整个对象关系图，查找那些作用域内没有任何引用的对象，然后释放。</li>
+<li>自动引用计数（ARC）：也是基于手动引用计数的，不过编译器来管理。</li>
+</ol>
+<p>之所以要引入ARC，主要是因为，手动引用计数需要手动进行，增加工作量，开发时需要显示的retain和release，而且容易循环retain；而垃圾回收机制容易产生性能损耗，更何况是在手机上。</p>
+]]></summary>
+    
+      <category term="ios" scheme="http://tracyone.com/tags/ios/"/>
+    
+      <category term="内存" scheme="http://tracyone.com/tags/%E5%86%85%E5%AD%98/"/>
+    
+      <category term="IOS" scheme="http://tracyone.com/categories/IOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[KVC&KVO]]></title>
