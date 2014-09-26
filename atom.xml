@@ -4,7 +4,7 @@
   <subtitle><![CDATA[HoHo~ 萌萌da技术博客!!!]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://tracyone.com/"/>
-  <updated>2014-09-23T13:31:33.867Z</updated>
+  <updated>2014-09-26T15:30:06.160Z</updated>
   <id>http://tracyone.com/</id>
   
   <author>
@@ -13,6 +13,92 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[函数式编程]]></title>
+    <link href="http://tracyone.com/2014/09/26/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
+    <id>http://tracyone.com/2014/09/26/函数式编程/</id>
+    <published>2014-09-26T15:26:35.000Z</published>
+    <updated>2014-09-26T15:29:56.000Z</updated>
+    <content type="html"><![CDATA[<p>从接触编程到现在，也接触过很多编程范式，从入门级的面向结构，到现在如日中天的面向对象，还有在web开发中很流行的面向切面的编程思想等。这一次要介绍的主题是：函数式的编程思想。</p>
+<p>Native app有很大一部分的时间是在等待事件发生，然后响应事件，比如等待网络请求完成，等待用户的操作，等待某些状态值的改变等等，等这些事件发生后，再做进一步处理。 但是这些等待和响应，并没有一个统一的处理方式。Delegate, Notification, Block, KVO, 常常会不知道该用哪个最合适。</p>
+<a id="more"></a>
+
+<h3 id="基础中的基础">基础中的基础</h3>
+<p>举个例子最清晰：</p>
+<p><code>a(x) = x*x;
+b(x) = x+1;
+a(b(x)) = (x+1)*(x+1)</code></p>
+<p>只要上过初中的都知道，多么简单的一堆函数，其实函数式编程就是这么简单，在IOS中也很容易实现（多亏了block）。先简单介绍下block，一句话总结就是，带有自动变量的匿名函数。</p>
+<h5 id="什么是Blocks">什么是Blocks</h5>
+<p>Block语法和一般的C语言函数定义只有两点不同：</p>
+<ol>
+<li>没有函数名</li>
+<li>带有^符号</li>
+</ol>
+<h5 id="Block类型变量">Block类型变量</h5>
+<p>声明Block变量比较麻烦，所以建议用 </p>
+<blockquote>
+<p>typedef int (^blk)(int)</p>
+</blockquote>
+<p>这种来简化声明。</p>
+<p>在Block中保存的局部变量是在创建该Block瞬间的局部变量，并且还是常量，所以理论上来说是不能改变它的值的。不过可以通过__block来声明成readwrite，达到改变局部变量的值的效果。</p>
+<h5 id="Block注意点">Block注意点</h5>
+<p>其实Block中保存的是对象的结构体指针，也就是说如果你截获了一个Array对象，你只是往里面添加对象，其实是可以的，而无果是要重新指向另外一个array就crash了，另外，对c语言数组的截获是没有实现的。</p>
+<p>一个不使用 block 的理由通常是 block 会存在导致 retain 环 (retain cycles) 的风险。如果发送者需要 retain block 但又不能确保引用在什么时候被赋值为 nil， 那么所有在 block 内对 self 的引用就会发生潜在的 retain 环。</p>
+<h3 id="基于Block的FRP">基于Block的FRP</h3>
+<p>写个最简单的例子：</p>
+<ul>
+<li><p>这是比较普通的实现:</p>
+<pre><code>   -(<span class="keyword">IBAction</span>)showAlertViewPressed:(<span class="keyword">id</span>)sender {
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:<span class="string">@"test"</span> message:<span class="literal">nil</span> delegate:<span class="keyword">self</span> cancelButtonTitle:<span class="string">@"Cancel"</span> otherButtonTitles: <span class="literal">nil</span>];
+
+  [alertView show];
+</code></pre><p>  }</p>
+<pre><code>  -(<span class="keyword">void</span>)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(<span class="built_in">NSInteger</span>)buttonIndex{
+      <span class="keyword">if</span> (buttonIndex == <span class="number">0</span>) {
+          <span class="built_in">NSLog</span>(<span class="string">@"Hello"</span>);
+      }
+  }
+</code></pre></li>
+<li><p>这是基于函数式的：</p>
+<p>  -(IBAction)showAlertViewPressed:(id)sender {</p>
+<pre><code>  UIAlertView *alertView = [[UIAlertView alloc] initAlertViewWithTitle:<span class="string">@"test"</span> message:<span class="literal">nil</span> cancelButtonTitle:<span class="string">@"Cancel"</span> otherButtonTitles: <span class="literal">nil</span> onCancelCompletion:^{
+      <span class="built_in">NSLog</span>(<span class="string">@"Hello"</span>);
+  }];
+  [alertView show];
+</code></pre><p>  }</p>
+</li>
+</ul>
+<p>这是比较简单的一个例子，不过基本能够感觉出来什么是基于函数式的编程了。</p>
+<p>再看一个比较经典的网络请求中的函数式编程：</p>
+<pre><code><span class="attr_selector">[[NSURLSession sharedSession]</span> downloadTaskWithURL<span class="value">:url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+    dispatch_queue_t queue = <span class="function">dispatch_get_global_queue</span>(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</span>
+    <span class="function">dispatch_async</span>(queue, ^{
+        <span class="comment">//在这里对下载好的数据进行处理</span>
+
+        <span class="function">dispatch_async</span>(<span class="function">dispatch_get_main_queue</span>(), ^{
+            <span class="comment">//用处理好的数据渲染页面等。</span>
+        });
+    });
+
+}];
+</code></pre><p>在这里不推荐大家网路请求也在其他线程中，会引发很多问题，比如说线程栈内存耗尽，用系统自带的异步请求就ok了。</p>
+<h3 id="新工作初体验">新工作初体验</h3>
+<p>来到同程，也已经一个月了，刚入职还似在眼前，从对整个客户端的一无所知，到现在能够贡献自己的一份力，收获颇丰。在这样一个简单而又不简单的团队中，在这样一种简单的氛围中，对于个人的成长是非常有利的。不得不说，在这样的环境中，能够使人飞速成长，也在这里感谢每一个帮助我，督促我不断前行的每一个人。</p>
+<p>再给自己定一个目标，每个月看一本书，无关是否技术类，贵在坚持！</p>
+]]></content>
+    <summary type="html"><![CDATA[<p>从接触编程到现在，也接触过很多编程范式，从入门级的面向结构，到现在如日中天的面向对象，还有在web开发中很流行的面向切面的编程思想等。这一次要介绍的主题是：函数式的编程思想。</p>
+<p>Native app有很大一部分的时间是在等待事件发生，然后响应事件，比如等待网络请求完成，等待用户的操作，等待某些状态值的改变等等，等这些事件发生后，再做进一步处理。 但是这些等待和响应，并没有一个统一的处理方式。Delegate, Notification, Block, KVO, 常常会不知道该用哪个最合适。</p>
+]]></summary>
+    
+      <category term="ios" scheme="http://tracyone.com/tags/ios/"/>
+    
+      <category term="block" scheme="http://tracyone.com/tags/block/"/>
+    
+      <category term="IOS" scheme="http://tracyone.com/categories/IOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[MRC&ARC进阶]]></title>
