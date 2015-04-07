@@ -1,7 +1,7 @@
 title: 工作一个月总结（再加上一点点iOS心得）
 date: 2014-07-26 21:23:01
 tags:
-- IOS
+- ios
 categories:
 - IOS
 ---
@@ -18,9 +18,10 @@ categories:
 再这里，你就得把自己当一条狗，你什么都不是，没有什么资本值得你去炫耀，你需要做的就是努力再努力的工作。公司和学校最本质的区别是：**你给学校钱，而公司却给你钱！** 你已经是一个成年人了，别伤感，只是说了个事实。
 
 <!--more-->
+
 ###勾心斗角总是免不了的
 
-最近悟出了个道理，
+最近悟出了个道理，。。。。。。。。。。。。这就是道理！
 
 人生本充满困难的（life is difficult），只不过有些人选择承受面对困难带来痛苦，有些人选择承受逃避困难带来的痛苦。当你深处生活的漩涡痛苦不已不能自拔的时候，你应该意识到这只不过是你选择了随波逐流人云亦云的生活带来痛苦而已，人世间没有哪条路是绝对的坦途。
 
@@ -44,6 +45,7 @@ categories:
     if (self.passwordTF.text.length == 0) {
             [self lockAnimationForView:self.passwordTF];
         }
+
 登录的过程总是伴随着校验，总不能让用户干等着吧，推荐个做的效果比较赞的指示器[MMProgressHUD](https://github.com/mutualmobile/MMProgressHUD)。再给个实例：
 
         BOOL autodismiss = YES;
@@ -67,25 +69,28 @@ categories:
 
 - 获取设备编号
 
-> UIDevice *device = [UIDevice currentDevice];
-NSUUID *uniqueIdentifier = device.identifierForVendor;
+
+    UIDevice *device = [UIDevice currentDevice];
+    NSUUID *uniqueIdentifier = device.identifierForVendor;
 
 - tableView选择风格
 
-> (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
-}
+
+    (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+    {
+        return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
+    }
 
 - 排序：
 
-> NSArray *sortDesc = @[[[NSSortDescriptor alloc] initWithKey:nil ascending:NO]];
-NSArray *sortSetArray = [timeset sortedArrayUsingDescriptors:sortDesc];
 
+     NSArray *sortDesc = @[[[NSSortDescriptor alloc] initWithKey:nil ascending:NO]];
+     NSArray *sortSetArray = [timeset sortedArrayUsingDescriptors:sortDesc];
 
 - 字符串比较：
 
-> if ([weekDate compare:[record objectForKey:@"expense_date"]] == -1)
+
+    if ([weekDate compare:[record objectForKey:@"expense_date"]] == -1)
 
 ####反编译地址经典教程
 

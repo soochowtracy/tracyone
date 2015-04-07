@@ -80,7 +80,7 @@ disqus_shortname: tracyone
 # Extensions
 ## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
-theme: light
+theme: freemind
 exclude_generator:
 
 # Deployment
